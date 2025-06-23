@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "github.com/im-varun/sareq/cmd"
 
 func main() {
-	fmt.Println("hello, world!")
+	cmd.Execute()
 }
