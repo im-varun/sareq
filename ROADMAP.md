@@ -8,5 +8,6 @@ This document outlines the development roadmap for SAReq.
 - Add basic versions of `GET`, `POST`, `PUT`, `PATCH` and `DELETE` methods
 - Add basic test coverage
 - Add basic build script (build executable binary and add it to system `PATH`)
+- Write simple documentation website for the project
 
 Target release date: October 29, 2025
