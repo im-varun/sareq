@@ -30,5 +30,5 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.Flags().BoolVarP(&versionFlag, "version", "v", false, "Prints the version of SAReq in use")
+	rootCmd.Flags().BoolVarP(&versionFlag, "version", "v", false, "prints the version of SAReq in use")
 }
