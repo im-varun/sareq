@@ -5,12 +5,12 @@ import (
 	"time"
 )
 
-type client struct {
+type Client struct {
 	httpClient *http.Client
 }
 
-func NewClient(timeout int) *client {
-	return &client{
+func NewClient(timeout int) *Client {
+	return &Client{
 		httpClient: &http.Client{
 			Timeout: time.Duration(timeout) * time.Second,
 		},
