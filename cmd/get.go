@@ -2,8 +2,11 @@ package cmd
 
 import (
 	"github.com/im-varun/sareq/internal/httpclient"
+	"github.com/im-varun/sareq/internal/utils/timeout"
 	"github.com/spf13/cobra"
 )
+
+var timeoutFlag int
 
 var getCmd = &cobra.Command{
 	Use:     "get <url>",
@@ -11,7 +14,7 @@ var getCmd = &cobra.Command{
 	Short:   "Send HTTP GET request to the specified URL",
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		client := httpclient.NewClient(40)
+		client := httpclient.NewClient(timeoutFlag)
 
 		err := client.Do(cmd.Name(), args[0], "")
 		if err != nil {
@@ -23,5 +26,7 @@ var getCmd = &cobra.Command{
 }
 
 func init() {
+	getCmd.Flags().IntVarP(&timeoutFlag, "timeout", "t", timeout.Timeout, "sets the timeout for HTTP GET request")
+
 	rootCmd.AddCommand(getCmd)
 }
