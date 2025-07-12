@@ -6,6 +6,8 @@ This document outlines the development roadmap for SAReq.
 
 - Add basic versions of `GET`, `POST`, `PUT`, `PATCH` and `DELETE` methods
 - Add support for headers in http request and http response
+- Add support for input from files
+- Add support for output to files
 - Add basic test coverage
 - Add basic build script (build executable binary and add it to system `PATH`)
 - Add dynamic loading of version number at build time using the build script
