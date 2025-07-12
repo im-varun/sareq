@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/im-varun/sareq/internal/utils"
+	"github.com/im-varun/sareq/internal/utils/appversion"
 	"github.com/spf13/cobra"
 )
 
@@ -15,7 +15,7 @@ var rootCmd = &cobra.Command{
 	Short: "SAReq is a CLI-based HTTP client for modern developers",
 	Run: func(cmd *cobra.Command, args []string) {
 		if versionFlag {
-			fmt.Println(utils.VersionString())
+			fmt.Println(appversion.VersionString())
 		} else {
 			cmd.Help()
 		}
