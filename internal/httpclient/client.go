@@ -16,3 +16,26 @@ func NewClient(timeout int) *Client {
 		},
 	}
 }
+
+func (c *Client) Do(method string, url string, body string) error {
+	reqConfig := NewRequestConfig(method, url, body)
+	req, err := reqConfig.Build()
+	if err != nil {
+		return err
+	}
+
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	respData, err := NewResponseData(resp)
+	if err != nil {
+		return err
+	}
+
+	respData.Print()
+
+	return nil
+}
