@@ -1,6 +1,7 @@
 package httpclient
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 )
@@ -22,4 +23,9 @@ func NewResponseData(resp *http.Response) (*ResponseData, error) {
 		body:          string(body),
 		contentLength: resp.ContentLength,
 	}, nil
+}
+
+func (rd *ResponseData) Print() {
+	fmt.Println("Status:", rd.status)
+	fmt.Println(rd.body)
 }
