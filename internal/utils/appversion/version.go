@@ -1,4 +1,4 @@
-package utils
+package appversion
 
 var versionNumber string = "dev"
 
