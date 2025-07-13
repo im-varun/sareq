@@ -15,3 +15,9 @@ This document outlines the development roadmap for SAReq.
 - Write simple documentation website for the project
 
 Target release date: October 29, 2025
+
+## Future Release (November 2025 - TBD)
+
+- Add HTTP Requests Registry
+  - Support saving HTTP requests to a local registry (HTTP Requests Registry)
+  - Ability to run saved requests from the local registry (HTTP Requests Registry)
