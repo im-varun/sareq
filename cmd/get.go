@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"github.com/im-varun/sareq/internal/httpclient"
-	"github.com/im-varun/sareq/internal/utils/timeout"
 	"github.com/spf13/cobra"
 )
 
@@ -26,7 +25,7 @@ var getCmd = &cobra.Command{
 }
 
 func init() {
-	getCmd.Flags().IntVarP(&timeoutFlag, "timeout", "t", timeout.Timeout, "sets the timeout for HTTP GET request")
+	getCmd.Flags().IntVarP(&timeoutFlag, "timeout", "t", httpclient.DefaultTimeout, "sets the timeout for HTTP GET request")
 
 	rootCmd.AddCommand(getCmd)
 }
