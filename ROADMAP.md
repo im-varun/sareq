@@ -21,3 +21,4 @@ Target release date: October 29, 2025
 - Add HTTP Requests Registry
   - Support saving HTTP requests to a local registry (HTTP Requests Registry)
   - Ability to run saved requests from the local registry (HTTP Requests Registry)
+- Add support for colored output
