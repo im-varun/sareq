@@ -1,3 +1,3 @@
 package httpclient
 
-const DefaultTimeout = 10
+const DefaultTimeout int = 10
