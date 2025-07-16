@@ -1,4 +1,8 @@
 package httpclient
 
 const DefaultTimeout int = 10
-const DefaultScheme string = "http"
+
+const HTTP string = "http"
+const HTTPS string = "https"
+
+const DefaultScheme string = HTTP
