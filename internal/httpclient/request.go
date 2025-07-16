@@ -20,7 +20,7 @@ func newRequestConfig(method string, url string, body string) *requestConfig {
 	}
 }
 
-func (rc *requestConfig) build() (*http.Request, error) {
+func (rc *requestConfig) buildRequest() (*http.Request, error) {
 	method := strings.ToUpper(rc.method)
 
 	var body io.Reader
