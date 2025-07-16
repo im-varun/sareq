@@ -18,8 +18,8 @@ func NewClient(timeout int) *Client {
 }
 
 func (c *Client) Do(method string, url string, body string) error {
-	reqConfig := NewRequestConfig(method, url, body)
-	req, err := reqConfig.Build()
+	reqConfig := newRequestConfig(method, url, body)
+	req, err := reqConfig.build()
 	if err != nil {
 		return err
 	}
@@ -30,12 +30,12 @@ func (c *Client) Do(method string, url string, body string) error {
 	}
 	defer resp.Body.Close()
 
-	respData, err := NewResponseData(resp)
+	respData, err := newResponseData(resp)
 	if err != nil {
 		return err
 	}
 
-	respData.Print()
+	respData.print()
 
 	return nil
 }

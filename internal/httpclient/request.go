@@ -6,21 +6,21 @@ import (
 	"strings"
 )
 
-type RequestConfig struct {
+type requestConfig struct {
 	method string
 	url    string
 	body   string
 }
 
-func NewRequestConfig(method string, url string, body string) *RequestConfig {
-	return &RequestConfig{
+func newRequestConfig(method string, url string, body string) *requestConfig {
+	return &requestConfig{
 		method: method,
 		url:    url,
 		body:   body,
 	}
 }
 
-func (rc *RequestConfig) Build() (*http.Request, error) {
+func (rc *requestConfig) build() (*http.Request, error) {
 	method := strings.ToUpper(rc.method)
 
 	var body io.Reader
