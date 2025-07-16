@@ -11,8 +11,8 @@ func ValidateRequestURL(reqURL string) (string, error) {
 		return "", errors.New("request URL cannot be empty")
 	}
 
-	if strings.HasPrefix(reqURL, "/") {
-		return "", errors.New("request URL must be absolute for an HTTP request")
+	if isRootRelativeURL(reqURL) {
+		return "", errors.New("request URL cannot be root relative")
 	}
 
 	parsedURL, err := url.Parse(reqURL)
@@ -24,12 +24,19 @@ func ValidateRequestURL(reqURL string) (string, error) {
 		parsedURL.Scheme = DefaultScheme
 	}
 
-	if parsedURL.Scheme != "http" && parsedURL.Scheme != "https" {
+	if isInvalidScheme(parsedURL.Scheme) {
 		return "", errors.New("scheme in request URL is not supported by the client")
 	}
 
-	if !strings.HasPrefix(parsedURL.String(), "http://") && !strings.HasPrefix(parsedURL.String(), "https://") {
-		return "", errors.New("request URL does not contain a valid scheme delimiter")
+	urlWithScheme := parsedURL.String()
+
+	parsedURL, err = url.Parse(urlWithScheme)
+	if err != nil {
+		return "", errors.New("failed to parse request URL")
+	}
+
+	if parsedURL.Host == "" {
+		return "", errors.New("request URL is missing a host")
 	}
 
 	parsedReqURL, err := url.ParseRequestURI(parsedURL.String())
@@ -38,4 +45,12 @@ func ValidateRequestURL(reqURL string) (string, error) {
 	}
 
 	return parsedReqURL.String(), nil
+}
+
+func isRootRelativeURL(url string) bool {
+	return strings.HasPrefix(url, "/")
+}
+
+func isInvalidScheme(scheme string) bool {
+	return scheme != "http" && scheme != "https"
 }
