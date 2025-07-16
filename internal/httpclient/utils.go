@@ -52,5 +52,5 @@ func isRootRelativeURL(url string) bool {
 }
 
 func isInvalidScheme(scheme string) bool {
-	return scheme != "http" && scheme != "https"
+	return scheme != HTTP && scheme != HTTPS
 }
