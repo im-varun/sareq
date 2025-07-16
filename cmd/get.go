@@ -13,9 +13,13 @@ var getCmd = &cobra.Command{
 	Short:   "Send HTTP GET request to the specified URL",
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		client := httpclient.NewClient(timeoutFlag)
+		url, err := httpclient.ValidateRequestURL(args[0])
+		if err != nil {
+			return err
+		}
 
-		err := client.Do(cmd.Name(), args[0], "")
+		client := httpclient.NewClient(timeoutFlag)
+		err = client.Do(cmd.Name(), url, "")
 		if err != nil {
 			return err
 		}
