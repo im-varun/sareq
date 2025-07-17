@@ -44,7 +44,9 @@ func ValidateRequestURL(reqURL string) (string, error) {
 		return "", errors.New("failed to parse request URL")
 	}
 
-	return parsedReqURL.String(), nil
+	validReqURL := parsedReqURL.String()
+
+	return validReqURL, nil
 }
 
 func isRootRelativeURL(url string) bool {
