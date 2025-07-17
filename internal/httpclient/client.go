@@ -19,6 +19,7 @@ func NewClient(timeout int) *Client {
 
 func (c *Client) Do(method string, url string, body string) error {
 	reqConfig := newRequestConfig(method, url, body)
+
 	req, err := reqConfig.buildRequest()
 	if err != nil {
 		return err
