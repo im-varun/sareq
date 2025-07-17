@@ -19,12 +19,10 @@ var getCmd = &cobra.Command{
 		}
 
 		client := httpclient.NewClient(timeoutFlag)
-		err = client.Do(cmd.Name(), url, "")
-		if err != nil {
-			return err
-		}
 
-		return nil
+		err = client.Do(cmd.Name(), url, "")
+
+		return err
 	},
 }
 
