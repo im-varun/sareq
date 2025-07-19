@@ -22,17 +22,15 @@ func ValidateRequestURL(reqURL string) (string, error) {
 
 	if parsedURL.Scheme == "" {
 		parsedURL.Scheme = DefaultScheme
+
+		parsedURL, err = url.Parse(parsedURL.String())
+		if err != nil {
+			return "", errors.New("failed to parse request URL")
+		}
 	}
 
 	if isInvalidScheme(parsedURL.Scheme) {
 		return "", errors.New("scheme in request URL is not supported by the client")
-	}
-
-	urlWithScheme := parsedURL.String()
-
-	parsedURL, err = url.Parse(urlWithScheme)
-	if err != nil {
-		return "", errors.New("failed to parse request URL")
 	}
 
 	if parsedURL.Host == "" {
