@@ -3,16 +3,11 @@ package httpclient
 import (
 	"errors"
 	"net/url"
-	"strings"
 )
 
 func ValidateRequestURL(reqURL string) (string, error) {
 	if reqURL == "" {
 		return "", errors.New("request URL cannot be empty")
-	}
-
-	if isRootRelativeURL(reqURL) {
-		return "", errors.New("request URL cannot be root relative")
 	}
 
 	parsedURL, err := url.Parse(reqURL)
@@ -40,10 +35,6 @@ func ValidateRequestURL(reqURL string) (string, error) {
 	validReqURL := parsedURL.String()
 
 	return validReqURL, nil
-}
-
-func isRootRelativeURL(url string) bool {
-	return strings.HasPrefix(url, "/")
 }
 
 func isInvalidScheme(scheme string) bool {
