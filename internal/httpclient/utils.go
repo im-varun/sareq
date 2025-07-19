@@ -37,12 +37,7 @@ func ValidateRequestURL(reqURL string) (string, error) {
 		return "", errors.New("request URL is missing a host")
 	}
 
-	parsedReqURL, err := url.ParseRequestURI(parsedURL.String())
-	if err != nil {
-		return "", errors.New("failed to parse request URL")
-	}
-
-	validReqURL := parsedReqURL.String()
+	validReqURL := parsedURL.String()
 
 	return validReqURL, nil
 }
