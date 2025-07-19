@@ -30,7 +30,7 @@ func ValidateRequestURL(reqURL string) (string, error) {
 	}
 
 	if isInvalidScheme(parsedURL.Scheme) {
-		return "", errors.New("scheme in request URL is not supported by the client")
+		return "", errors.New("scheme in request URL is invalid or not supported by the client")
 	}
 
 	if parsedURL.Host == "" {
