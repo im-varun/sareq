@@ -20,7 +20,7 @@ Target release date: October 29, 2025
   - Support saving HTTP requests to a local registry (HTTP Requests Registry)
   - Ability to run saved requests from the local registry (HTTP Requests Registry)
 - Add support for colored output
-- Add feature for logging activity of the application
+- Add custom logger for logging activity of the application
 - Add support for prettify'ing JSON output
 - Add support for input from files
 - Add support for output to files
