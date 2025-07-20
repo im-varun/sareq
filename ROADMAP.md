@@ -6,9 +6,6 @@ This document outlines the development roadmap for SAReq.
 
 - Add basic versions of `GET`, `POST`, `PUT`, `PATCH` and `DELETE` methods
 - Add support for headers in http request and http response
-- Add support for input from files
-- Add support for output to files
-- Add support for prettify'ing JSON output
 - Add basic test coverage
 - Add basic build script (build executable binary and add it to system `PATH`)
 - Add dynamic loading of version number at build time using the build script
@@ -24,3 +21,6 @@ Target release date: October 29, 2025
   - Ability to run saved requests from the local registry (HTTP Requests Registry)
 - Add support for colored output
 - Add feature for logging activity of the application
+- Add support for prettify'ing JSON output
+- Add support for input from files
+- Add support for output to files
