@@ -3,14 +3,14 @@ package cmd
 import (
 	"os"
 
-	"github.com/im-varun/sareq/internal/utils/appversion"
+	"github.com/im-varun/sareq/internal/release"
 	"github.com/spf13/cobra"
 )
 
 var rootCmd = &cobra.Command{
 	Use:     "sareq",
 	Short:   "SAReq is a CLI-based HTTP client for modern developers",
-	Version: appversion.VersionString(),
+	Version: release.Version(),
 }
 
 func Execute() {
