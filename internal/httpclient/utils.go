@@ -16,7 +16,7 @@ func ValidateRequestURL(reqURL string) (string, error) {
 	}
 
 	if parsedURL.Scheme == "" {
-		parsedURL.Scheme = DefaultScheme
+		parsedURL.Scheme = defaultScheme
 
 		parsedURL, err = url.Parse(parsedURL.String())
 		if err != nil {
@@ -38,5 +38,5 @@ func ValidateRequestURL(reqURL string) (string, error) {
 }
 
 func isInvalidScheme(scheme string) bool {
-	return scheme != HTTP && scheme != HTTPS
+	return scheme != schemeHTTP && scheme != schemeHTTPS
 }

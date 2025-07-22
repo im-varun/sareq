@@ -27,7 +27,7 @@ var getCmd = &cobra.Command{
 }
 
 func init() {
-	getCmd.Flags().IntVarP(&timeoutFlag, "timeout", "t", httpclient.DefaultTimeout, "sets the timeout for HTTP GET request")
+	getCmd.Flags().IntVarP(&timeoutFlag, "timeout", "t", httpclient.DefaultTimeoutSeconds, "sets the timeout for HTTP GET request")
 
 	rootCmd.AddCommand(getCmd)
 }
