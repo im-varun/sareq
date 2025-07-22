@@ -17,8 +17,8 @@ func NewClient(timeout int) *Client {
 	}
 }
 
-func (c *Client) Do(method string, url string, body string) error {
-	reqConfig := newRequestConfig(method, url, body)
+func (c *Client) Do(reqMethod string, reqURL string, reqBody string) error {
+	reqConfig := newRequestConfig(reqMethod, reqURL, reqBody)
 
 	req, err := reqConfig.buildRequest()
 	if err != nil {

@@ -7,25 +7,25 @@ import (
 )
 
 type responseData struct {
-	status        string
-	body          string
-	contentLength int64
+	respStatus        string
+	respBody          string
+	respContentLength int64
 }
 
 func newResponseData(resp *http.Response) (*responseData, error) {
-	body, err := io.ReadAll(resp.Body)
+	respBody, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
 
 	return &responseData{
-		status:        resp.Status,
-		body:          string(body),
-		contentLength: resp.ContentLength,
+		respStatus:        resp.Status,
+		respBody:          string(respBody),
+		respContentLength: resp.ContentLength,
 	}, nil
 }
 
 func (rd *responseData) print() {
-	fmt.Println("Status:", rd.status)
-	fmt.Println(rd.body)
+	fmt.Println("Status:", rd.respStatus)
+	fmt.Println(rd.respBody)
 }

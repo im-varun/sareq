@@ -7,28 +7,28 @@ import (
 )
 
 type requestConfig struct {
-	method string
-	url    string
-	body   string
+	reqMethod string
+	reqURL    string
+	reqBody   string
 }
 
-func newRequestConfig(method string, url string, body string) *requestConfig {
+func newRequestConfig(reqMethod string, reqURL string, reqBody string) *requestConfig {
 	return &requestConfig{
-		method: method,
-		url:    url,
-		body:   body,
+		reqMethod: reqMethod,
+		reqURL:    reqURL,
+		reqBody:   reqBody,
 	}
 }
 
 func (rc *requestConfig) buildRequest() (*http.Request, error) {
-	method := strings.ToUpper(rc.method)
+	reqMethod := strings.ToUpper(rc.reqMethod)
 
-	var body io.Reader
-	if rc.body != "" {
-		body = strings.NewReader(rc.body)
+	var reqBody io.Reader
+	if rc.reqBody != "" {
+		reqBody = strings.NewReader(rc.reqBody)
 	}
 
-	req, err := http.NewRequest(method, rc.url, body)
+	req, err := http.NewRequest(reqMethod, rc.reqURL, reqBody)
 	if err != nil {
 		return nil, err
 	}
