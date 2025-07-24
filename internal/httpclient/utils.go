@@ -25,11 +25,15 @@ func ValidateRequestURL(reqURL string) (string, error) {
 	}
 
 	if parsedURL.Scheme != schemeHTTP && parsedURL.Scheme != schemeHTTPS {
-		return "", errors.New("scheme in request URL is invalid or not supported by the client")
+		return "", errors.New("request URL contains a scheme that is invalid or not supported by the client")
 	}
 
 	if parsedURL.Host == "" {
 		return "", errors.New("request URL is missing a host")
+	}
+
+	if parsedURL.Fragment != "" {
+		return "", errors.New("request URL cannot contain a fragment")
 	}
 
 	validReqURL := parsedURL.String()
