@@ -3,10 +3,11 @@ package httpclient
 import (
 	"errors"
 	"net/url"
+	"strings"
 )
 
 func ValidateRequestURL(reqURL string) (string, error) {
-	if reqURL == "" {
+	if reqURL == "" || len(strings.TrimSpace(reqURL)) == 0 {
 		return "", errors.New("request URL cannot be empty")
 	}
 
