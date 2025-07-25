@@ -7,6 +7,13 @@ import (
 	"strings"
 )
 
+const (
+	schemeHTTP  string = "http"
+	schemeHTTPS string = "https"
+
+	defaultScheme string = schemeHTTP
+)
+
 func ValidateRequestURL(reqURL string) (string, error) {
 	if reqURL == "" || len(strings.TrimSpace(reqURL)) == 0 {
 		return "", errors.New("request URL cannot be empty")
