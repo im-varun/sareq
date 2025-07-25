@@ -1,11 +1,10 @@
 package cmd
 
 import (
+	"github.com/im-varun/sareq/cmd/flags"
 	"github.com/im-varun/sareq/internal/httpclient"
 	"github.com/spf13/cobra"
 )
-
-var timeoutFlag int
 
 var getCmd = &cobra.Command{
 	Use:     "get <url>",
@@ -18,16 +17,15 @@ var getCmd = &cobra.Command{
 			return err
 		}
 
-		client := httpclient.NewClient(timeoutFlag)
+		client := httpclient.NewClient(flags.ReqTimeout)
 
-		err = client.Do(cmd.Name(), reqURL, "")
+		err = client.Do(cmd.Name(), reqURL, flags.ReqBody)
 
 		return err
 	},
 }
 
 func init() {
-	getCmd.Flags().IntVarP(&timeoutFlag, "timeout", "t", 10, "sets the timeout for HTTP GET request")
-
+	flags.RegisterRequestFlags(getCmd)
 	rootCmd.AddCommand(getCmd)
 }
