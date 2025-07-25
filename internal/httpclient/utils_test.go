@@ -110,3 +110,33 @@ func TestValidateRequestURL(t *testing.T) {
 		})
 	}
 }
+
+func TestValidateRequestBody(t *testing.T) {
+	var tests = []struct {
+		name          string
+		reqBody       string
+		expectedError string
+	}{
+		{
+			name:          "invalid request body",
+			reqBody:       `{"id: 1, name: gopher"}}`,
+			expectedError: "request body is invalid",
+		},
+		{
+			name:          "valid request body",
+			reqBody:       `{"id": 1, "name": "gopher"}`,
+			expectedError: "",
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			err := ValidateRequestBody(test.reqBody)
+			if err != nil {
+				if err.Error() != test.expectedError {
+					t.Errorf("expected error: \"%s\", got error: \"%s\"", test.expectedError, err.Error())
+				}
+			}
+		})
+	}
+}

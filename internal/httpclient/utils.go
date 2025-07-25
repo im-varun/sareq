@@ -1,6 +1,7 @@
 package httpclient
 
 import (
+	"encoding/json"
 	"errors"
 	"net/url"
 	"strings"
@@ -40,4 +41,14 @@ func ValidateRequestURL(reqURL string) (string, error) {
 	validReqURL := parsedURL.String()
 
 	return validReqURL, nil
+}
+
+func ValidateRequestBody(reqBody string) error {
+	reqBodyIsValid := json.Valid([]byte(reqBody))
+
+	if !reqBodyIsValid {
+		return errors.New("request body is invalid")
+	}
+
+	return nil
 }
