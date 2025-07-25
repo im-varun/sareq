@@ -13,7 +13,7 @@ const (
 	reqBodyLong    string = "body"
 	reqBodyShort   string = "B"
 	reqBodyDefault string = ""
-	reqBodyUsage   string = "initialize body to send with HTTP request"
+	reqBodyUsage   string = "set body to send with HTTP request"
 )
 
 var ReqTimeout int
