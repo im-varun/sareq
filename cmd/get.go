@@ -17,6 +17,13 @@ var getCmd = &cobra.Command{
 			return err
 		}
 
+		if flags.ReqBody != "" {
+			err = httpclient.ValidateRequestBody(flags.ReqBody)
+			if err != nil {
+				return err
+			}
+		}
+
 		client := httpclient.NewClient(flags.ReqTimeout)
 
 		err = client.Do(cmd.Name(), reqURL, flags.ReqBody)
