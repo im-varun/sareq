@@ -10,28 +10,88 @@ func TestValidateRequestURL(t *testing.T) {
 		expectedError  string
 	}{
 		{
-			name:           "empty request url",
+			name:           "empty request url with no spaces",
 			reqURL:         "",
 			expectedOutput: "",
 			expectedError:  "request URL cannot be empty",
 		},
 		{
-			name:           "empty request url with whitespaces",
+			name:           "empty request url with spaces",
 			reqURL:         "    ",
 			expectedOutput: "",
-			expectedError:  "failed to parse request URL",
+			expectedError:  "request URL cannot be empty",
 		},
 		{
-			name:           "empty request url with tab spaces",
-			reqURL:         "				",
+			name:           "request url containing only scheme delimiter",
+			reqURL:         "://",
 			expectedOutput: "",
 			expectedError:  "failed to parse request URL",
 		},
 		{
-			name:           "empty request url with whitespaces and tab spaces",
-			reqURL:         "  			  		",
+			name:           "request url with scheme delimiter and without scheme",
+			reqURL:         "://example.com",
 			expectedOutput: "",
 			expectedError:  "failed to parse request URL",
+		},
+		{
+			name:           "request url without scheme",
+			reqURL:         "example.com",
+			expectedOutput: "http://example.com",
+			expectedError:  "",
+		},
+		{
+			name:           "request url with valid http scheme",
+			reqURL:         "http://example.com",
+			expectedOutput: "http://example.com",
+			expectedError:  "",
+		},
+		{
+			name:           "request url with valid https scheme",
+			reqURL:         "https://example.com",
+			expectedOutput: "https://example.com",
+			expectedError:  "",
+		},
+		{
+			name:           "request url with invalid scheme",
+			reqURL:         "hello://example.com",
+			expectedOutput: "",
+			expectedError:  "request URL contains a scheme that is invalid or not supported by the client",
+		},
+		{
+			name:           "request url with invalid http like scheme",
+			reqURL:         "htt://example.com",
+			expectedOutput: "",
+			expectedError:  "request URL contains a scheme that is invalid or not supported by the client",
+		},
+		{
+			name:           "request url with invalid https like scheme",
+			reqURL:         "htps://example.com",
+			expectedOutput: "",
+			expectedError:  "request URL contains a scheme that is invalid or not supported by the client",
+		},
+		{
+			name:           "request url with valid http scheme and missing host",
+			reqURL:         "http:///path/to/example/resource",
+			expectedOutput: "",
+			expectedError:  "request URL is missing a host",
+		},
+		{
+			name:           "request url with valid https scheme and missing host",
+			reqURL:         "https:///path/to/example/resource",
+			expectedOutput: "",
+			expectedError:  "request URL is missing a host",
+		},
+		{
+			name:           "request url without valid scheme and missing host",
+			reqURL:         "/path/to/example/resource",
+			expectedOutput: "",
+			expectedError:  "request URL is missing a host",
+		},
+		{
+			name:           "request url with fragment",
+			reqURL:         "example.com/path/to/resource#hash",
+			expectedOutput: "",
+			expectedError:  "request URL cannot contain a fragment",
 		},
 	}
 
