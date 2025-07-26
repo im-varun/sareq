@@ -1,11 +1,14 @@
 package flags
 
-import "github.com/spf13/cobra"
+import (
+	"github.com/im-varun/sareq/internal/httpclient"
+	"github.com/spf13/cobra"
+)
 
 const (
 	reqTimeoutLong    string = "timeout"
 	reqTimeoutShort   string = "t"
-	reqTimeoutDefault int    = 10
+	reqTimeoutDefault int    = httpclient.DefaultTimeoutSeconds
 	reqTimeoutUsage   string = "set timeout for HTTP request"
 )
 
