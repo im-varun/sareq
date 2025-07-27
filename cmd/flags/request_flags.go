@@ -26,7 +26,7 @@ func RegisterRequestFlags(cmd *cobra.Command) {
 	cmd.Flags().IntVarP(&ReqTimeout, reqTimeoutLong, reqTimeoutShort, reqTimeoutDefault, reqTimeoutUsage)
 	cmd.Flags().StringVarP(&ReqBody, reqBodyLong, reqBodyShort, reqBodyDefault, reqBodyUsage)
 
-	if cmd.Name() == "post" {
+	if cmd.Name() == "post" || cmd.Name() == "put" {
 		cmd.MarkFlagRequired(reqBodyLong)
 	}
 }
