@@ -22,12 +22,12 @@ const (
 var ReqTimeout int
 var ReqBody string
 
-func RegisterRequestFlags(cmd *cobra.Command) {
-	cmd.Flags().IntVarP(&ReqTimeout, reqTimeoutLong, reqTimeoutShort, reqTimeoutDefault, reqTimeoutUsage)
-	cmd.Flags().StringVarP(&ReqBody, reqBodyLong, reqBodyShort, reqBodyDefault, reqBodyUsage)
+func RegisterRequestFlags(reqCmd *cobra.Command) {
+	reqCmd.Flags().IntVarP(&ReqTimeout, reqTimeoutLong, reqTimeoutShort, reqTimeoutDefault, reqTimeoutUsage)
+	reqCmd.Flags().StringVarP(&ReqBody, reqBodyLong, reqBodyShort, reqBodyDefault, reqBodyUsage)
 
-	commandName := cmd.Name()
+	commandName := reqCmd.Name()
 	if commandName == "post" || commandName == "put" || commandName == "patch" {
-		cmd.MarkFlagRequired(reqBodyLong)
+		reqCmd.MarkFlagRequired(reqBodyLong)
 	}
 }
