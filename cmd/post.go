@@ -12,7 +12,6 @@ var postCmd = &cobra.Command{
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		err := runRequest(cmd.Name(), args[0])
-
 		return err
 	},
 }
