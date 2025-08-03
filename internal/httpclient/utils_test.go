@@ -119,12 +119,22 @@ func TestValidateRequestBody(t *testing.T) {
 	}{
 		{
 			name:          "invalid request body",
-			reqBody:       `{"id: 1, name: gopher"}}`,
+			reqBody:       `{"id": 1, "name": "john doe"}}`,
 			expectedError: "request body is invalid",
 		},
 		{
 			name:          "valid request body",
-			reqBody:       `{"id": 1, "name": "gopher"}`,
+			reqBody:       `{"id": 1, "name": "john doe"}`,
+			expectedError: "",
+		},
+		{
+			name:          "invalid nested request body",
+			reqBody:       `{"id": 1, "person": {"firstname": "john", "lastname": "doe"}`,
+			expectedError: "request body is invalid",
+		},
+		{
+			name:          "valid nested request body",
+			reqBody:       `{"id": 1, "person": {"firstname": "john", "lastname": "doe"}}`,
 			expectedError: "",
 		},
 	}
