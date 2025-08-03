@@ -1,11 +1,11 @@
-package cmd
+package httprunner
 
 import (
 	"github.com/im-varun/sareq/cmd/flags"
 	"github.com/im-varun/sareq/internal/httpclient"
 )
 
-func runRequest(reqMethod string, reqURL string) error {
+func Run(reqMethod string, reqURL string) error {
 	reqURL, err := httpclient.ValidateRequestURL(reqURL)
 	if err != nil {
 		return err
