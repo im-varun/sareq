@@ -6,29 +6,17 @@ import (
 	"strings"
 )
 
-type requestConfig struct {
-	reqMethod string
-	reqURL    string
-	reqBody   string
-}
+func newRequest(reqMethod string, reqURL string, reqBody string) (*http.Request, error) {
+	method := strings.ToUpper(reqMethod)
 
-func newRequestConfig(reqMethod string, reqURL string, reqBody string) *requestConfig {
-	return &requestConfig{
-		reqMethod: reqMethod,
-		reqURL:    reqURL,
-		reqBody:   reqBody,
-	}
-}
+	url := reqURL
 
-func (rc *requestConfig) buildRequest() (*http.Request, error) {
-	reqMethod := strings.ToUpper(rc.reqMethod)
-
-	var reqBody io.Reader
-	if rc.reqBody != "" {
-		reqBody = strings.NewReader(rc.reqBody)
+	var body io.Reader
+	if reqBody != "" {
+		body = strings.NewReader(reqBody)
 	}
 
-	req, err := http.NewRequest(reqMethod, rc.reqURL, reqBody)
+	req, err := http.NewRequest(method, url, body)
 	if err != nil {
 		return nil, err
 	}

@@ -20,6 +20,7 @@ func Run(reqMethod string, reqURL string) error {
 
 	client := httpclient.NewClient(flags.ReqTimeout)
 
-	err = client.Do(reqMethod, reqURL, flags.ReqBody)
+	_, err = client.Execute(reqMethod, reqURL, flags.ReqBody)
+
 	return err
 }

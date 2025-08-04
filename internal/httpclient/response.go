@@ -1,31 +1,37 @@
 package httpclient
 
 import (
-	"fmt"
 	"io"
 	"net/http"
 )
 
-type responseData struct {
-	respStatus        string
-	respBody          string
-	respContentLength int64
+type Response struct {
+	status        string
+	body          string
+	contentLength int64
 }
 
-func newResponseData(resp *http.Response) (*responseData, error) {
-	respBody, err := io.ReadAll(resp.Body)
+func parseResponse(resp *http.Response) (*Response, error) {
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
 
-	return &responseData{
-		respStatus:        resp.Status,
-		respBody:          string(respBody),
-		respContentLength: resp.ContentLength,
+	return &Response{
+		status:        resp.Status,
+		body:          string(body),
+		contentLength: resp.ContentLength,
 	}, nil
 }
 
-func (rd *responseData) print() {
-	fmt.Println("Status:", rd.respStatus)
-	fmt.Println(rd.respBody)
+func (r *Response) Status() string {
+	return r.status
+}
+
+func (r *Response) Body() string {
+	return r.body
+}
+
+func (r *Response) ContentLength() int64 {
+	return r.contentLength
 }

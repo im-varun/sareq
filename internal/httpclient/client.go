@@ -21,26 +21,22 @@ func NewClient(timeout int) *Client {
 	}
 }
 
-func (c *Client) Do(reqMethod string, reqURL string, reqBody string) error {
-	reqConfig := newRequestConfig(reqMethod, reqURL, reqBody)
-
-	req, err := reqConfig.buildRequest()
+func (c *Client) Execute(reqMethod string, reqURL string, reqBody string) (*Response, error) {
+	req, err := newRequest(reqMethod, reqURL, reqBody)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer resp.Body.Close()
 
-	respData, err := newResponseData(resp)
+	respData, err := parseResponse(resp)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	respData.print()
-
-	return nil
+	return respData, nil
 }
