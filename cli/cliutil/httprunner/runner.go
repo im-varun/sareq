@@ -1,7 +1,7 @@
 package httprunner
 
 import (
-	"github.com/im-varun/sareq/cmd/flags"
+	"github.com/im-varun/sareq/cli/flags"
 	"github.com/im-varun/sareq/internal/httpclient"
 )
 
