@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"github.com/im-varun/sareq/cmd/flags"
-	"github.com/im-varun/sareq/cmd/httprunner"
+	"github.com/im-varun/sareq/cli/cliutil/httprunner"
+	"github.com/im-varun/sareq/cli/flags"
 	"github.com/spf13/cobra"
 )
 
