@@ -11,7 +11,7 @@ const (
 	schemeHTTP  string = "http"
 	schemeHTTPS string = "https"
 
-	defaultScheme string = schemeHTTP
+	defaultScheme string = schemeHTTPS
 )
 
 func ValidateRequestURL(reqURL string) (string, error) {

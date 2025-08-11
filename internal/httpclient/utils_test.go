@@ -36,7 +36,7 @@ func TestValidateRequestURL(t *testing.T) {
 		{
 			name:           "request url without scheme",
 			reqURL:         "example.com",
-			expectedOutput: "http://example.com",
+			expectedOutput: defaultScheme + "://example.com",
 			expectedError:  "",
 		},
 		{
