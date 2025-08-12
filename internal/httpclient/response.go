@@ -7,6 +7,7 @@ import (
 
 type Response struct {
 	status        string
+	protocol      string
 	body          string
 	contentLength int64
 }
@@ -19,6 +20,7 @@ func parseResponse(resp *http.Response) (*Response, error) {
 
 	return &Response{
 		status:        resp.Status,
+		protocol:      resp.Proto,
 		body:          string(body),
 		contentLength: resp.ContentLength,
 	}, nil
@@ -26,6 +28,10 @@ func parseResponse(resp *http.Response) (*Response, error) {
 
 func (r *Response) Status() string {
 	return r.status
+}
+
+func (r *Response) Protocol() string {
+	return r.protocol
 }
 
 func (r *Response) Body() string {
