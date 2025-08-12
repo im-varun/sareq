@@ -1,6 +1,8 @@
 package httprunner
 
 import (
+	"fmt"
+
 	"github.com/im-varun/sareq/cli/flags"
 	"github.com/im-varun/sareq/internal/httpclient"
 )
@@ -20,7 +22,29 @@ func Run(reqMethod string, reqURL string) error {
 
 	client := httpclient.NewClient(flags.ReqTimeout)
 
-	_, err = client.Execute(reqMethod, reqURL, flags.ReqBody)
+	resp, err := client.Execute(reqMethod, reqURL, flags.ReqBody)
+	if err != nil {
+		return err
+	}
 
-	return err
+	printResponse(resp)
+
+	return nil
+}
+
+func printResponse(r *httpclient.Response) {
+	fmt.Printf("%s %s\n", r.Protocol(), r.Status())
+	fmt.Printf("Content-Length: %d\n\n", r.ContentLength())
+
+	header := r.Header()
+	for key, values := range header {
+		if len(values) == 1 {
+			fmt.Printf("%s: %s\n", key, values[0])
+		} else {
+			fmt.Printf("%s: %v\n", key, values)
+		}
+	}
+	fmt.Println()
+
+	fmt.Printf("%s\n", r.Body())
 }
