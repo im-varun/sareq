@@ -36,7 +36,7 @@ func Run(reqMethod string, reqURL string) error {
 
 func printResponse(r *httpclient.Response) {
 	fmt.Printf("%s %s\n", r.Protocol(), r.Status())
-	fmt.Printf("Content-Length: %d\n\n", r.ContentLength())
+	fmt.Println()
 
 	header := r.Header()
 	for key, values := range header {
