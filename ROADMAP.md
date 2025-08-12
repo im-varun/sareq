@@ -4,9 +4,8 @@ This document outlines the development roadmap for SAReq.
 
 ## Initial Development Phase (July 2025 to October 2025)
 
-- Add support for headers in http request and http response
+- Add support for headers in http request
 - Add colored output feature
-- Add prettify'ed JSON output feature
 - Add thorough tests for both frontend and backend components of the application
 - Add basic build script (build executable binary and add it to system `PATH`)
 - Add dynamic loading of version number at build time using the build script
