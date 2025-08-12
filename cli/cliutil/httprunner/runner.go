@@ -1,6 +1,8 @@
 package httprunner
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 
 	"github.com/im-varun/sareq/cli/flags"
@@ -47,4 +49,15 @@ func printResponse(r *httpclient.Response) {
 	fmt.Println()
 
 	fmt.Printf("%s\n", r.Body())
+}
+
+func prettifyResponseBody(respBody string) (string, error) {
+	var prettyBody bytes.Buffer
+
+	err := json.Indent(&prettyBody, []byte(respBody), "", "  ")
+	if err != nil {
+		return "", err
+	}
+
+	return prettyBody.String(), nil
 }
