@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	"github.com/im-varun/sareq/cli/flags"
 	"github.com/im-varun/sareq/internal/httpclient"
@@ -35,7 +36,7 @@ func Run(reqMethod string, reqURL string) error {
 }
 
 func printResponse(r *httpclient.Response) {
-	fmt.Printf("%s %s\n", r.Protocol(), r.Status())
+	fmt.Println(r.Protocol(), r.Status())
 	fmt.Println()
 
 	header := r.Header()
@@ -48,7 +49,31 @@ func printResponse(r *httpclient.Response) {
 	}
 	fmt.Println()
 
-	fmt.Printf("%s\n", r.Body())
+	body := strings.Trim(r.Body(), "\r\n")
+
+	var bodyIsJSONType bool
+
+	contentType, ok := header["Content-Type"]
+	if ok {
+		for _, str := range contentType {
+			if strings.Contains(str, "application/json") {
+				bodyIsJSONType = true
+				break
+			}
+		}
+	}
+
+	if bodyIsJSONType {
+		prettyBody, err := prettifyResponseBody(body)
+		if err != nil {
+			// body could not be prettifyed, so printing it normally
+			fmt.Println(body)
+		} else {
+			fmt.Println(prettyBody)
+		}
+	} else {
+		fmt.Println(body)
+	}
 }
 
 func prettifyResponseBody(respBody string) (string, error) {
