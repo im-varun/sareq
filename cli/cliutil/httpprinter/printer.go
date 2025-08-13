@@ -1,8 +1,6 @@
 package httpprinter
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
 	"strings"
 
@@ -48,15 +46,4 @@ func PrintResponse(r *httpclient.Response) {
 	} else {
 		fmt.Println(body)
 	}
-}
-
-func prettifyResponseBody(respBody string) (string, error) {
-	var prettyBody bytes.Buffer
-
-	err := json.Indent(&prettyBody, []byte(respBody), "", "  ")
-	if err != nil {
-		return "", err
-	}
-
-	return prettyBody.String(), nil
 }
