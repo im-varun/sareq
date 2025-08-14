@@ -6,12 +6,14 @@ import (
 )
 
 func prettifyResponseBody(respBody string) (string, error) {
-	var prettyBody bytes.Buffer
+	var prettyBodyBuf bytes.Buffer
 
-	err := json.Indent(&prettyBody, []byte(respBody), "", "  ")
+	err := json.Indent(&prettyBodyBuf, []byte(respBody), "", "  ")
 	if err != nil {
 		return "", err
 	}
 
-	return prettyBody.String(), nil
+	prettyBody := prettyBodyBuf.String()
+
+	return prettyBody, nil
 }
