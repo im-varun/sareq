@@ -9,7 +9,22 @@ import (
 )
 
 func PrintResponse(r *httpclient.Response) {
-	fmt.Println(r.Protocol(), r.Status())
+	respPrinter := newResponsePrinter()
+
+	respPrinter.Protocol("%s ", r.Protocol())
+
+	statusCode := r.StatusCode()
+	switch {
+	case statusCode >= 200 && statusCode < 300:
+		respPrinter.StatusGreen("%s\n", r.Status())
+	case statusCode >= 400 && statusCode < 500:
+		respPrinter.StatusYellow("%s\n", r.Status())
+	case statusCode >= 500 && statusCode < 600:
+		respPrinter.StatusRed("%s\n", r.Status())
+	default:
+		fmt.Printf("%s\n", r.Status())
+	}
+
 	fmt.Println()
 
 	header := r.Header()
@@ -24,16 +39,19 @@ func PrintResponse(r *httpclient.Response) {
 	slices.Sort(keys)
 
 	for _, key := range keys {
+		respPrinter.HeaderKey("%s: ", key)
+
 		values := header[key]
 		switch len(values) {
 		case 0:
-			fmt.Printf("%s: empty\n", key)
+			respPrinter.HeaderValue("%s\n", "empty")
 		case 1:
-			fmt.Printf("%s: %s\n", key, values[0])
+			respPrinter.HeaderValue("%s\n", values[0])
 		default:
-			fmt.Printf("%s: %v\n", key, values)
+			respPrinter.HeaderValue("%v\n", values)
 		}
 	}
+
 	fmt.Println()
 
 	body := strings.Trim(r.Body(), "\r\n")
@@ -54,11 +72,11 @@ func PrintResponse(r *httpclient.Response) {
 		prettyBody, err := prettifyResponseBody(body)
 		if err != nil {
 			// body could not be prettifyed, so printing it normally
-			fmt.Println(body)
+			respPrinter.Body("%s\n", body)
 		} else {
-			fmt.Println(prettyBody)
+			respPrinter.Body("%s\n", prettyBody)
 		}
 	} else {
-		fmt.Println(body)
+		respPrinter.Body("%s\n", body)
 	}
 }
