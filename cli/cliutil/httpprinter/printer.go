@@ -2,6 +2,7 @@ package httpprinter
 
 import (
 	"fmt"
+	"slices"
 	"strings"
 
 	"github.com/im-varun/sareq/internal/httpclient"
@@ -12,10 +13,24 @@ func PrintResponse(r *httpclient.Response) {
 	fmt.Println()
 
 	header := r.Header()
-	for key, values := range header {
-		if len(values) == 1 {
+
+	keys := make([]string, len(header))
+
+	i := 0
+	for key := range header {
+		keys[i] = key
+		i++
+	}
+	slices.Sort(keys)
+
+	for _, key := range keys {
+		values := header[key]
+		switch len(values) {
+		case 0:
+			fmt.Printf("%s: empty\n", key)
+		case 1:
 			fmt.Printf("%s: %s\n", key, values[0])
-		} else {
+		default:
 			fmt.Printf("%s: %v\n", key, values)
 		}
 	}
