@@ -6,10 +6,11 @@ import (
 )
 
 type Response struct {
-	status   string
-	protocol string
-	header   map[string][]string
-	body     string
+	status     string
+	statusCode int
+	protocol   string
+	header     map[string][]string
+	body       string
 }
 
 func parseResponse(resp *http.Response) (*Response, error) {
@@ -19,15 +20,20 @@ func parseResponse(resp *http.Response) (*Response, error) {
 	}
 
 	return &Response{
-		status:   resp.Status,
-		protocol: resp.Proto,
-		header:   resp.Header,
-		body:     string(body),
+		status:     resp.Status,
+		statusCode: resp.StatusCode,
+		protocol:   resp.Proto,
+		header:     resp.Header,
+		body:       string(body),
 	}, nil
 }
 
 func (r *Response) Status() string {
 	return r.status
+}
+
+func (r *Response) StatusCode() int {
+	return r.statusCode
 }
 
 func (r *Response) Protocol() string {
