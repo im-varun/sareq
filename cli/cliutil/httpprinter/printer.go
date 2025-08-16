@@ -9,8 +9,12 @@ import (
 	"github.com/im-varun/sareq/internal/httpclient"
 )
 
-func PrintResponse(r *httpclient.Response) {
+func PrintResponse(r *httpclient.Response, noColor bool) {
 	respColoring := coloring.InitResponseColoring()
+
+	if noColor {
+		respColoring.DisableColors()
+	}
 
 	respColoring.Protocol("%s ", r.Protocol())
 

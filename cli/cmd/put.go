@@ -18,7 +18,7 @@ var putCmd = &cobra.Command{
 			return err
 		}
 
-		httpprinter.PrintResponse(resp)
+		httpprinter.PrintResponse(resp, flags.RespNoColor)
 
 		return nil
 	},
@@ -26,5 +26,7 @@ var putCmd = &cobra.Command{
 
 func init() {
 	flags.RegisterRequestFlags(putCmd)
+	flags.RegisterResponseFormattingFlags(putCmd)
+
 	rootCmd.AddCommand(putCmd)
 }

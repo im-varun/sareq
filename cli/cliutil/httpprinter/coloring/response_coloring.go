@@ -1,6 +1,8 @@
 package coloring
 
-import "github.com/fatih/color"
+import (
+	"github.com/fatih/color"
+)
 
 type ResponseColoring struct {
 	Protocol     ColoredPrinter
@@ -22,4 +24,14 @@ func InitResponseColoring() *ResponseColoring {
 		HeaderValue:  color.New(color.FgHiWhite).PrintfFunc(),
 		Body:         color.New(color.FgYellow).PrintfFunc(),
 	}
+}
+
+func (rc *ResponseColoring) DisableColors() {
+	rc.Protocol = NoColorPrinter
+	rc.StatusGreen = NoColorPrinter
+	rc.StatusYellow = NoColorPrinter
+	rc.StatusRed = NoColorPrinter
+	rc.HeaderKey = NoColorPrinter
+	rc.HeaderValue = NoColorPrinter
+	rc.Body = NoColorPrinter
 }

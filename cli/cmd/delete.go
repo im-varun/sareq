@@ -18,7 +18,7 @@ var deleteCmd = &cobra.Command{
 			return err
 		}
 
-		httpprinter.PrintResponse(resp)
+		httpprinter.PrintResponse(resp, flags.RespNoColor)
 
 		return nil
 	},
@@ -26,5 +26,7 @@ var deleteCmd = &cobra.Command{
 
 func init() {
 	flags.RegisterRequestFlags(deleteCmd)
+	flags.RegisterResponseFormattingFlags(deleteCmd)
+
 	rootCmd.AddCommand(deleteCmd)
 }
