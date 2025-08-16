@@ -9,7 +9,7 @@ import (
 	"github.com/im-varun/sareq/internal/httpclient"
 )
 
-func PrintResponse(r *httpclient.Response, noColor bool) {
+func PrintResponse(r *httpclient.Response, noColor bool, noPrettify bool) {
 	respColoring := coloring.InitResponseColoring()
 
 	if noColor {
@@ -73,7 +73,7 @@ func PrintResponse(r *httpclient.Response, noColor bool) {
 		}
 	}
 
-	if bodyIsJSONType {
+	if bodyIsJSONType && !noPrettify {
 		prettyBody, err := prettifyResponseBody(body)
 		if err != nil {
 			// body could not be prettifyed, so printing it normally

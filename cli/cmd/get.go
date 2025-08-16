@@ -18,7 +18,7 @@ var getCmd = &cobra.Command{
 			return err
 		}
 
-		httpprinter.PrintResponse(resp, flags.RespNoColor)
+		httpprinter.PrintResponse(resp, flags.RespNoColor, flags.RespNoPrettify)
 
 		return nil
 	},
