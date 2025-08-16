@@ -19,5 +19,5 @@ var RespNoPrettify bool
 
 func RegisterResponseFormattingFlags(reqCmd *cobra.Command) {
 	reqCmd.Flags().BoolVar(&RespNoColor, respNoColorLong, respNoColorDefault, respNoColorUsage)
-	reqCmd.Flags().BoolVar(&RespNoPrettify, respNoPrettifyLong, respNoPrettifyDefault, respNoColorUsage)
+	reqCmd.Flags().BoolVar(&RespNoPrettify, respNoPrettifyLong, respNoPrettifyDefault, respNoPrettifyUsage)
 }
