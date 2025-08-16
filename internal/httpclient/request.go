@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func newRequest(reqMethod string, reqURL string, reqBody string) (*http.Request, error) {
+func newRequest(reqMethod string, reqURL string, reqBody string, reqHeader map[string]string) (*http.Request, error) {
 	method := strings.ToUpper(reqMethod)
 
 	url := reqURL
@@ -19,6 +19,10 @@ func newRequest(reqMethod string, reqURL string, reqBody string) (*http.Request,
 	req, err := http.NewRequest(method, url, body)
 	if err != nil {
 		return nil, err
+	}
+
+	for key, value := range reqHeader {
+		req.Header.Add(key, value)
 	}
 
 	return req, nil

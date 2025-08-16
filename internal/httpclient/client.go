@@ -21,8 +21,8 @@ func NewClient(timeout int) *Client {
 	}
 }
 
-func (c *Client) Execute(reqMethod string, reqURL string, reqBody string) (*Response, error) {
-	req, err := newRequest(reqMethod, reqURL, reqBody)
+func (c *Client) Execute(reqMethod string, reqURL string, reqBody string, reqHeader map[string]string) (*Response, error) {
+	req, err := newRequest(reqMethod, reqURL, reqBody, reqHeader)
 	if err != nil {
 		return nil, err
 	}

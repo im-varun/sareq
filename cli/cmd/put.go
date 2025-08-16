@@ -13,7 +13,7 @@ var putCmd = &cobra.Command{
 	Short:   "Send HTTP PUT request to the specified URL",
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		resp, err := httprunner.Run(cmd.Name(), args[0])
+		resp, err := httprunner.Run(cmd.Name(), args[0], flags.ReqBody, flags.ReqHeader, flags.ReqTimeout)
 		if err != nil {
 			return err
 		}

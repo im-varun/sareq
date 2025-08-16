@@ -1,26 +1,25 @@
 package httprunner
 
 import (
-	"github.com/im-varun/sareq/cli/flags"
 	"github.com/im-varun/sareq/internal/httpclient"
 )
 
-func Run(reqMethod string, reqURL string) (*httpclient.Response, error) {
+func Run(reqMethod string, reqURL string, reqBody string, reqHeader map[string]string, reqTimeout int) (*httpclient.Response, error) {
 	reqURL, err := httpclient.ValidateRequestURL(reqURL)
 	if err != nil {
 		return nil, err
 	}
 
-	if flags.ReqBody != "" {
-		err = httpclient.ValidateRequestBody(flags.ReqBody)
+	if reqBody != "" {
+		err = httpclient.ValidateRequestBody(reqBody)
 		if err != nil {
 			return nil, err
 		}
 	}
 
-	client := httpclient.NewClient(flags.ReqTimeout)
+	client := httpclient.NewClient(reqTimeout)
 
-	resp, err := client.Execute(reqMethod, reqURL, flags.ReqBody)
+	resp, err := client.Execute(reqMethod, reqURL, reqBody, reqHeader)
 	if err != nil {
 		return nil, err
 	}
