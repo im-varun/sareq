@@ -5,22 +5,23 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/im-varun/sareq/cli/cliutil/httpprinter/coloring"
 	"github.com/im-varun/sareq/internal/httpclient"
 )
 
 func PrintResponse(r *httpclient.Response) {
-	respPrinter := newResponsePrinter()
+	respColoring := coloring.InitResponseColoring()
 
-	respPrinter.Protocol("%s ", r.Protocol())
+	respColoring.Protocol("%s ", r.Protocol())
 
 	statusCode := r.StatusCode()
 	switch {
 	case statusCode >= 200 && statusCode < 300:
-		respPrinter.StatusGreen("%s\n", r.Status())
+		respColoring.StatusGreen("%s\n", r.Status())
 	case statusCode >= 400 && statusCode < 500:
-		respPrinter.StatusYellow("%s\n", r.Status())
+		respColoring.StatusYellow("%s\n", r.Status())
 	case statusCode >= 500 && statusCode < 600:
-		respPrinter.StatusRed("%s\n", r.Status())
+		respColoring.StatusRed("%s\n", r.Status())
 	default:
 		fmt.Printf("%s\n", r.Status())
 	}
@@ -39,16 +40,16 @@ func PrintResponse(r *httpclient.Response) {
 	slices.Sort(keys)
 
 	for _, key := range keys {
-		respPrinter.HeaderKey("%s: ", key)
+		respColoring.HeaderKey("%s: ", key)
 
 		values := header[key]
 		switch len(values) {
 		case 0:
-			respPrinter.HeaderValue("%s\n", "empty")
+			respColoring.HeaderValue("%s\n", "empty")
 		case 1:
-			respPrinter.HeaderValue("%s\n", values[0])
+			respColoring.HeaderValue("%s\n", values[0])
 		default:
-			respPrinter.HeaderValue("%v\n", values)
+			respColoring.HeaderValue("%v\n", values)
 		}
 	}
 
@@ -72,11 +73,11 @@ func PrintResponse(r *httpclient.Response) {
 		prettyBody, err := prettifyResponseBody(body)
 		if err != nil {
 			// body could not be prettifyed, so printing it normally
-			respPrinter.Body("%s\n", body)
+			respColoring.Body("%s\n", body)
 		} else {
-			respPrinter.Body("%s\n", prettyBody)
+			respColoring.Body("%s\n", prettyBody)
 		}
 	} else {
-		respPrinter.Body("%s\n", body)
+		respColoring.Body("%s\n", body)
 	}
 }
