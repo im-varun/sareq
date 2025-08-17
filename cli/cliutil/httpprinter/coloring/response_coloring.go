@@ -25,10 +25,10 @@ func InitResponseColoring() *ResponseColoring {
 }
 
 func (rc *ResponseColoring) DisableColors() {
-	rc.Protocol = NoColorPrinter
-	rc.StatusSuccess = NoColorPrinter
-	rc.StatusFailure = NoColorPrinter
-	rc.HeaderKey = NoColorPrinter
-	rc.HeaderValue = NoColorPrinter
-	rc.Body = NoColorPrinter
+	rc.Protocol = NoColoredPrinter
+	rc.StatusSuccess = NoColoredPrinter
+	rc.StatusFailure = NoColoredPrinter
+	rc.HeaderKey = NoColoredPrinter
+	rc.HeaderValue = NoColoredPrinter
+	rc.Body = NoColoredPrinter
 }
