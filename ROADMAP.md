@@ -21,3 +21,4 @@ Target release date: October 29, 2025
 - Add custom logger for logging activity of the application
 - Add support for input from files
 - Add support for output to files
+- Add support for passing URL query strings separately using a flag as a convenience
