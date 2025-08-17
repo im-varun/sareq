@@ -7,15 +7,6 @@ import (
 	"strings"
 )
 
-const DefaultTimeoutSeconds int = 10
-
-const (
-	schemeHTTP  string = "http"
-	schemeHTTPS string = "https"
-
-	defaultScheme string = schemeHTTPS
-)
-
 func ValidateRequestURL(reqURL string) (string, error) {
 	if reqURL == "" || len(strings.TrimSpace(reqURL)) == 0 {
 		return "", errors.New("request URL cannot be empty")
@@ -27,7 +18,7 @@ func ValidateRequestURL(reqURL string) (string, error) {
 	}
 
 	if parsedURL.Scheme == "" {
-		parsedURL.Scheme = defaultScheme
+		parsedURL.Scheme = DefaultScheme
 
 		parsedURL, err = url.Parse(parsedURL.String())
 		if err != nil {
@@ -35,7 +26,7 @@ func ValidateRequestURL(reqURL string) (string, error) {
 		}
 	}
 
-	if parsedURL.Scheme != schemeHTTP && parsedURL.Scheme != schemeHTTPS {
+	if parsedURL.Scheme != SchemeHTTP && parsedURL.Scheme != SchemeHTTPS {
 		return "", errors.New("request URL contains a scheme that is invalid or not supported by the client")
 	}
 
