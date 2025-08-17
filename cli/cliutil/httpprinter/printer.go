@@ -21,13 +21,9 @@ func PrintResponse(r *httpclient.Response, noColor bool, noPrettify bool) {
 	statusCode := r.StatusCode()
 	switch {
 	case statusCode >= 200 && statusCode < 300:
-		respColoring.StatusGreen("%s\n", r.Status())
-	case statusCode >= 400 && statusCode < 500:
-		respColoring.StatusYellow("%s\n", r.Status())
-	case statusCode >= 500 && statusCode < 600:
-		respColoring.StatusRed("%s\n", r.Status())
+		respColoring.StatusSuccess("%s\n", r.Status())
 	default:
-		fmt.Printf("%s\n", r.Status())
+		respColoring.StatusFailure("%s\n", r.Status())
 	}
 
 	fmt.Println()

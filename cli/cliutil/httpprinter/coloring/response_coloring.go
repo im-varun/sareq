@@ -5,32 +5,29 @@ import (
 )
 
 type ResponseColoring struct {
-	Protocol     ColoredPrinter
-	StatusGreen  ColoredPrinter
-	StatusYellow ColoredPrinter
-	StatusRed    ColoredPrinter
-	HeaderKey    ColoredPrinter
-	HeaderValue  ColoredPrinter
-	Body         ColoredPrinter
+	Protocol      ColoredPrinter
+	StatusSuccess ColoredPrinter
+	StatusFailure ColoredPrinter
+	HeaderKey     ColoredPrinter
+	HeaderValue   ColoredPrinter
+	Body          ColoredPrinter
 }
 
 func InitResponseColoring() *ResponseColoring {
 	return &ResponseColoring{
-		Protocol:     color.New(color.FgCyan, color.Bold).PrintfFunc(),
-		StatusGreen:  color.New(color.FgGreen, color.Bold).PrintfFunc(),
-		StatusYellow: color.New(color.FgYellow, color.Bold).PrintfFunc(),
-		StatusRed:    color.New(color.FgRed, color.Bold).PrintfFunc(),
-		HeaderKey:    color.New(color.FgMagenta).PrintfFunc(),
-		HeaderValue:  color.New(color.FgHiWhite).PrintfFunc(),
-		Body:         color.New(color.FgYellow).PrintfFunc(),
+		Protocol:      color.New(color.FgHiCyan, color.Bold).PrintfFunc(),
+		StatusSuccess: color.New(color.FgHiGreen, color.Bold).PrintfFunc(),
+		StatusFailure: color.New(color.FgHiRed, color.Bold).PrintfFunc(),
+		HeaderKey:     color.New(color.FgHiMagenta).PrintfFunc(),
+		HeaderValue:   color.New(color.FgHiWhite).PrintfFunc(),
+		Body:          color.New(color.FgHiYellow).PrintfFunc(),
 	}
 }
 
 func (rc *ResponseColoring) DisableColors() {
 	rc.Protocol = NoColorPrinter
-	rc.StatusGreen = NoColorPrinter
-	rc.StatusYellow = NoColorPrinter
-	rc.StatusRed = NoColorPrinter
+	rc.StatusSuccess = NoColorPrinter
+	rc.StatusFailure = NoColorPrinter
 	rc.HeaderKey = NoColorPrinter
 	rc.HeaderValue = NoColorPrinter
 	rc.Body = NoColorPrinter
