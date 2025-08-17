@@ -5,10 +5,6 @@ import (
 	"time"
 )
 
-const (
-	DefaultTimeoutSeconds int = 10
-)
-
 type Client struct {
 	httpClient *http.Client
 }

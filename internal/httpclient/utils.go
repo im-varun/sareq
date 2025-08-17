@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+const DefaultTimeoutSeconds int = 10
+
 const (
 	schemeHTTP  string = "http"
 	schemeHTTPS string = "https"
