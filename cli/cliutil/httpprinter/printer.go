@@ -2,6 +2,7 @@ package httpprinter
 
 import (
 	"fmt"
+	"mime"
 	"slices"
 	"strings"
 
@@ -57,27 +58,22 @@ func PrintResponse(r *httpclient.Response, noColor bool, noPrettify bool) {
 
 	body := strings.Trim(r.Body(), "\r\n")
 
-	var bodyIsJSONType bool
-
-	contentType, ok := header["Content-Type"]
-	if ok {
-		for _, str := range contentType {
-			if strings.Contains(str, "application/json") {
-				bodyIsJSONType = true
-				break
-			}
-		}
+	contentType := header["Content-Type"]
+	mediaType, _, err := mime.ParseMediaType(contentType[0])
+	if err != nil {
+		mediaType = "text/plain"
 	}
 
-	if bodyIsJSONType && !noPrettify {
+	bodyTextType := strings.Split(mediaType, "/")[1]
+
+	if mediaType == "application/json" && !noPrettify {
 		prettyBody, err := prettifyResponseBody(body)
 		if err != nil {
-			// body could not be prettifyed, so printing it normally
-			respColoring.Body("%s\n", body)
+			respColoring.Body(bodyTextType, "%s\n", body)
 		} else {
-			respColoring.Body("%s\n", prettyBody)
+			respColoring.Body(bodyTextType, "%s\n", prettyBody)
 		}
 	} else {
-		respColoring.Body("%s\n", body)
+		respColoring.Body(bodyTextType, "%s\n", body)
 	}
 }
