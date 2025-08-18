@@ -20,4 +20,3 @@ Target release date: October 29, 2025
 - Add support for input from files
 - Add support for output to files
 - Add support for passing URL query strings separately using a flag as a convenience
-- Add IDE-like syntax highlighting feature for response body
