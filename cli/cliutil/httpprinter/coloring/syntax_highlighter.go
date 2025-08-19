@@ -10,6 +10,8 @@ import (
 	"github.com/fatih/color"
 )
 
+type SyntaxHighlighter func(typ string, format string, a ...any)
+
 func NewSyntaxHighlighterFunc() SyntaxHighlighter {
 	return func(typ string, format string, a ...any) {
 		baseColoring := color.New(color.FgHiYellow).PrintfFunc()
@@ -49,4 +51,8 @@ func NewSyntaxHighlighterFunc() SyntaxHighlighter {
 
 		fmt.Print(buf.String())
 	}
+}
+
+func NoSyntaxHighlighter(typ string, format string, a ...any) {
+	fmt.Printf(format, a...)
 }
