@@ -28,7 +28,7 @@ func NewSyntaxHighlighterFunc() SyntaxHighlighter {
 			return
 		}
 
-		style := styles.Get("monokai")
+		style := styles.Get("dracula")
 		if style == nil {
 			baseColoring(format, a...)
 			return
