@@ -31,13 +31,11 @@ func PrintResponse(r *httpclient.Response, noColor bool, noPrettify bool) {
 
 	header := r.Header()
 
-	keys := make([]string, len(header))
-
-	i := 0
+	keys := make([]string, 0, len(header))
 	for key := range header {
-		keys[i] = key
-		i++
+		keys = append(keys, key)
 	}
+
 	slices.Sort(keys)
 
 	for _, key := range keys {
