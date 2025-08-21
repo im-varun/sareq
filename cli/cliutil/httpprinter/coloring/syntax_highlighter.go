@@ -10,27 +10,27 @@ import (
 	"github.com/fatih/color"
 )
 
-type SyntaxHighlighter func(typ string, format string, a ...any)
+type SyntaxHighlighterFunc func(typ string, format string, a ...any)
 
-func NewSyntaxHighlighterFunc() SyntaxHighlighter {
+func NewSyntaxHighlighterFunc(baseColor color.Attribute) SyntaxHighlighterFunc {
 	return func(typ string, format string, a ...any) {
-		baseColoring := color.New(color.FgHiYellow).PrintfFunc()
+		baseColoredPrinter := NewColoredPrinterFunc(baseColor)
 
 		lexer := lexers.Get(typ)
 		if lexer == nil {
-			baseColoring(format, a...)
+			baseColoredPrinter(format, a...)
 			return
 		}
 
 		formatter := formatters.Get("terminal16m")
 		if formatter == nil {
-			baseColoring(format, a...)
+			baseColoredPrinter(format, a...)
 			return
 		}
 
 		style := styles.Get("dracula")
 		if style == nil {
-			baseColoring(format, a...)
+			baseColoredPrinter(format, a...)
 			return
 		}
 
@@ -38,14 +38,14 @@ func NewSyntaxHighlighterFunc() SyntaxHighlighter {
 
 		iterator, err := lexer.Tokenise(nil, str)
 		if err != nil {
-			baseColoring(format, a...)
+			baseColoredPrinter(format, a...)
 			return
 		}
 
 		var buf bytes.Buffer
 		err = formatter.Format(&buf, style, iterator)
 		if err != nil {
-			baseColoring(format, a...)
+			baseColoredPrinter(format, a...)
 			return
 		}
 
@@ -53,6 +53,6 @@ func NewSyntaxHighlighterFunc() SyntaxHighlighter {
 	}
 }
 
-func NoSyntaxHighlighter(typ string, format string, a ...any) {
+func NoSyntaxHighlighterFunc(typ string, format string, a ...any) {
 	fmt.Printf(format, a...)
 }

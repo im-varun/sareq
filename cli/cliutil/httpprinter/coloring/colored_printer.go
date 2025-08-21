@@ -1,9 +1,18 @@
 package coloring
 
-import "fmt"
+import (
+	"fmt"
 
-type ColoredPrinter func(format string, a ...any)
+	"github.com/fatih/color"
+)
 
-func NoColoredPrinter(format string, a ...any) {
+type ColoredPrinterFunc func(format string, a ...any)
+
+func NewColoredPrinterFunc(attrs ...color.Attribute) ColoredPrinterFunc {
+	c := color.New(attrs...)
+	return c.PrintfFunc()
+}
+
+func NoColoredPrinterFunc(format string, a ...any) {
 	fmt.Printf(format, a...)
 }
