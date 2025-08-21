@@ -12,9 +12,9 @@ import (
 
 type SyntaxHighlighterFunc func(typ string, format string, a ...any)
 
-func NewSyntaxHighlighterFunc(baseColor color.Attribute) SyntaxHighlighterFunc {
+func NewSyntaxHighlighterFunc(attrs ...color.Attribute) SyntaxHighlighterFunc {
 	return func(typ string, format string, a ...any) {
-		baseColoredPrinter := NewColoredPrinterFunc(baseColor)
+		baseColoredPrinter := NewColoredPrinterFunc(attrs...)
 
 		lexer := lexers.Get(typ)
 		if lexer == nil {

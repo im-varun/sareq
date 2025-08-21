@@ -9,8 +9,8 @@ import (
 type ColoredPrinterFunc func(format string, a ...any)
 
 func NewColoredPrinterFunc(attrs ...color.Attribute) ColoredPrinterFunc {
-	c := color.New(attrs...)
-	return c.PrintfFunc()
+	coloring := color.New(attrs...)
+	return coloring.PrintfFunc()
 }
 
 func NoColoredPrinterFunc() ColoredPrinterFunc {
