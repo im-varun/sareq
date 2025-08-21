@@ -62,16 +62,16 @@ func PrintResponse(r *httpclient.Response, noColor bool, noPrettify bool) {
 		mediaType = "text/plain"
 	}
 
-	bodyTextType := strings.Split(mediaType, "/")[1]
+	bodyType := strings.Split(mediaType, "/")[1]
 
 	if mediaType == "application/json" && !noPrettify {
 		prettyBody, err := prettifyResponseBody(body)
 		if err != nil {
-			respColoring.Body(bodyTextType, "%s\n", body)
+			respColoring.Body(bodyType, "%s\n", body)
 		} else {
-			respColoring.Body(bodyTextType, "%s\n", prettyBody)
+			respColoring.Body(bodyType, "%s\n", prettyBody)
 		}
 	} else {
-		respColoring.Body(bodyTextType, "%s\n", body)
+		respColoring.Body(bodyType, "%s\n", body)
 	}
 }
