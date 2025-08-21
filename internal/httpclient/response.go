@@ -41,7 +41,15 @@ func (r *Response) Protocol() string {
 }
 
 func (r *Response) Header() map[string][]string {
-	return r.header
+	headerCopy := make(map[string][]string, len(r.header))
+
+	for key, values := range r.header {
+		valuesCopy := make([]string, len(values))
+		copy(valuesCopy, values)
+		headerCopy[key] = valuesCopy
+	}
+
+	return headerCopy
 }
 
 func (r *Response) Body() string {
