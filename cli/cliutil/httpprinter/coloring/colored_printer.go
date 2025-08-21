@@ -13,6 +13,8 @@ func NewColoredPrinterFunc(attrs ...color.Attribute) ColoredPrinterFunc {
 	return c.PrintfFunc()
 }
 
-func NoColoredPrinterFunc(format string, a ...any) {
-	fmt.Printf(format, a...)
+func NoColoredPrinterFunc() ColoredPrinterFunc {
+	return func(format string, a ...any) {
+		fmt.Printf(format, a...)
+	}
 }

@@ -53,6 +53,8 @@ func NewSyntaxHighlighterFunc(baseColor color.Attribute) SyntaxHighlighterFunc {
 	}
 }
 
-func NoSyntaxHighlighterFunc(typ string, format string, a ...any) {
-	fmt.Printf(format, a...)
+func NoSyntaxHighlighterFunc() SyntaxHighlighterFunc {
+	return func(typ string, format string, a ...any) {
+		fmt.Printf(format, a...)
+	}
 }
