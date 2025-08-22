@@ -10,26 +10,26 @@ import (
 	"github.com/im-varun/sareq/internal/httpclient"
 )
 
-func PrintResponse(r *httpclient.Response, noColor bool, noPrettify bool) {
+func PrintResponse(resp *httpclient.Response, respNoColor bool, respNoPrettify bool) {
 	respColoring := coloring.InitResponseColoring()
 
-	if noColor {
+	if respNoColor {
 		respColoring.DisableColors()
 	}
 
-	respColoring.Protocol("%s ", r.Protocol())
+	respColoring.Protocol("%s ", resp.Protocol())
 
-	statusCode := r.StatusCode()
+	statusCode := resp.StatusCode()
 	switch {
 	case statusCode >= 200 && statusCode < 300:
-		respColoring.StatusSuccess("%s\n", r.Status())
+		respColoring.StatusSuccess("%s\n", resp.Status())
 	default:
-		respColoring.StatusFailure("%s\n", r.Status())
+		respColoring.StatusFailure("%s\n", resp.Status())
 	}
 
 	fmt.Println()
 
-	header := r.Header()
+	header := resp.Header()
 
 	keys := make([]string, 0, len(header))
 	for key := range header {
@@ -54,7 +54,7 @@ func PrintResponse(r *httpclient.Response, noColor bool, noPrettify bool) {
 
 	fmt.Println()
 
-	body := strings.Trim(r.Body(), "\r\n")
+	body := strings.Trim(resp.Body(), "\r\n")
 
 	contentType := header["Content-Type"]
 	mediaType, _, err := mime.ParseMediaType(contentType[0])
@@ -64,7 +64,7 @@ func PrintResponse(r *httpclient.Response, noColor bool, noPrettify bool) {
 
 	bodyType := strings.Split(mediaType, "/")[1]
 
-	if mediaType == "application/json" && !noPrettify {
+	if mediaType == "application/json" && !respNoPrettify {
 		prettyBody, err := prettifyResponseBody(body)
 		if err != nil {
 			respColoring.Body(bodyType, "%s\n", body)
