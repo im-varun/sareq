@@ -6,25 +6,24 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/im-varun/sareq/cli/cliutil/httpprinter/coloring"
 	"github.com/im-varun/sareq/internal/httpclient"
 )
 
-func PrintResponse(resp *httpclient.Response, respNoColor bool, respNoPrettify bool) {
-	respColoring := coloring.InitResponseColoring()
+func Print(resp *httpclient.Response, respNoColor bool, respNoPrettify bool) {
+	respColoring := initResponseColoring()
 
 	if respNoColor {
-		respColoring.DisableColors()
+		respColoring.disableColors()
 	}
 
-	respColoring.Protocol("%s ", resp.Protocol())
+	respColoring.protocol("%s ", resp.Protocol())
 
 	statusCode := resp.StatusCode()
 	switch {
 	case statusCode >= 200 && statusCode < 300:
-		respColoring.StatusSuccess("%s\n", resp.Status())
+		respColoring.statusSuccess("%s\n", resp.Status())
 	default:
-		respColoring.StatusFailure("%s\n", resp.Status())
+		respColoring.statusFailure("%s\n", resp.Status())
 	}
 
 	fmt.Println()
@@ -39,16 +38,16 @@ func PrintResponse(resp *httpclient.Response, respNoColor bool, respNoPrettify b
 	slices.Sort(keys)
 
 	for _, key := range keys {
-		respColoring.HeaderKey("%s: ", key)
+		respColoring.headerKey("%s: ", key)
 
 		values := header[key]
 		switch len(values) {
 		case 0:
-			respColoring.HeaderValue("%s\n", "empty")
+			respColoring.headerValue("%s\n", "empty")
 		case 1:
-			respColoring.HeaderValue("%s\n", values[0])
+			respColoring.headerValue("%s\n", values[0])
 		default:
-			respColoring.HeaderValue("%v\n", values)
+			respColoring.headerValue("%v\n", values)
 		}
 	}
 
@@ -67,11 +66,11 @@ func PrintResponse(resp *httpclient.Response, respNoColor bool, respNoPrettify b
 	if mediaType == "application/json" && !respNoPrettify {
 		prettyBody, err := prettifyResponseBody(body)
 		if err != nil {
-			respColoring.Body(bodyType, "%s\n", body)
+			respColoring.body(bodyType, "%s\n", body)
 		} else {
-			respColoring.Body(bodyType, "%s\n", prettyBody)
+			respColoring.body(bodyType, "%s\n", prettyBody)
 		}
 	} else {
-		respColoring.Body(bodyType, "%s\n", body)
+		respColoring.body(bodyType, "%s\n", body)
 	}
 }

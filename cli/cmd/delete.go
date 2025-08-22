@@ -13,12 +13,12 @@ var deleteCmd = &cobra.Command{
 	Short:   "Send HTTP DELETE request to the specified URL",
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		resp, err := httprunner.Run(cmd.Name(), args[0], flags.ReqBody, flags.ReqHeader, flags.ReqTimeout)
+		resp, err := httprunner.Run(cmd.Name(), args[0], flags.RequestBody(), flags.RequestHeader(), flags.RequestTimeout())
 		if err != nil {
 			return err
 		}
 
-		httpprinter.PrintResponse(resp, flags.RespNoColor, flags.RespNoPrettify)
+		httpprinter.Print(resp, flags.ResponseNoColor(), flags.ResponseNoPrettify())
 
 		return nil
 	},

@@ -1,21 +1,39 @@
 package flags
 
 import (
+	"maps"
+
 	"github.com/im-varun/sareq/internal/httpclient"
 	"github.com/spf13/cobra"
 )
 
-var ReqTimeout int
-var ReqBody string
-var ReqHeader map[string]string
+var reqTimeout int
+var reqBody string
+var reqHeader map[string]string
 
 func RegisterRequestFlags(reqCmd *cobra.Command) {
-	reqCmd.Flags().IntVarP(&ReqTimeout, "timeout", "t", httpclient.DefaultTimeoutSeconds, "set timeout for HTTP request")
-	reqCmd.Flags().StringVarP(&ReqBody, "body", "B", "", "set body to send with HTTP request")
-	reqCmd.Flags().StringToStringVarP(&ReqHeader, "header", "H", nil, "set header to send with HTTP request")
+	reqCmd.Flags().IntVarP(&reqTimeout, "timeout", "t", httpclient.DefaultTimeoutSeconds, "set timeout for HTTP request")
+	reqCmd.Flags().StringVarP(&reqBody, "body", "B", "", "set body to send with HTTP request")
+	reqCmd.Flags().StringToStringVarP(&reqHeader, "header", "H", nil, "set header to send with HTTP request")
 
 	commandName := reqCmd.Name()
 	if commandName == "post" || commandName == "put" || commandName == "patch" {
 		reqCmd.MarkFlagRequired("body")
 	}
+}
+
+func RequestTimeout() int {
+	return reqTimeout
+}
+
+func RequestBody() string {
+	return reqBody
+}
+
+func RequestHeader() map[string]string {
+	headerCopy := make(map[string]string, len(reqHeader))
+
+	maps.Copy(headerCopy, reqHeader)
+
+	return headerCopy
 }

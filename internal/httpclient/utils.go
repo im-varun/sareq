@@ -18,7 +18,7 @@ func ValidateRequestURL(reqURL string) (string, error) {
 	}
 
 	if parsedURL.Scheme == "" {
-		parsedURL.Scheme = DefaultScheme
+		parsedURL.Scheme = defaultScheme
 
 		parsedURL, err = url.Parse(parsedURL.String())
 		if err != nil {
@@ -26,7 +26,7 @@ func ValidateRequestURL(reqURL string) (string, error) {
 		}
 	}
 
-	if parsedURL.Scheme != SchemeHTTP && parsedURL.Scheme != SchemeHTTPS {
+	if parsedURL.Scheme != schemeHTTP && parsedURL.Scheme != schemeHTTPS {
 		return "", errors.New("request URL contains a scheme that is invalid or not supported by the client")
 	}
 
