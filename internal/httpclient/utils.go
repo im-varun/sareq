@@ -2,19 +2,18 @@ package httpclient
 
 import (
 	"encoding/json"
-	"errors"
 	"net/url"
 	"strings"
 )
 
 func ValidateRequestURL(reqURL string) (string, error) {
 	if reqURL == "" || len(strings.TrimSpace(reqURL)) == 0 {
-		return "", errors.New("request URL cannot be empty")
+		return "", errRequestURLEmpty
 	}
 
 	parsedURL, err := url.Parse(reqURL)
 	if err != nil {
-		return "", errors.New("failed to parse request URL")
+		return "", errRequestURLParsingFailed
 	}
 
 	if parsedURL.Scheme == "" {
@@ -22,20 +21,20 @@ func ValidateRequestURL(reqURL string) (string, error) {
 
 		parsedURL, err = url.Parse(parsedURL.String())
 		if err != nil {
-			return "", errors.New("failed to parse request URL")
+			return "", errRequestURLParsingFailed
 		}
 	}
 
 	if parsedURL.Scheme != schemeHTTP && parsedURL.Scheme != schemeHTTPS {
-		return "", errors.New("request URL contains a scheme that is invalid or not supported by the client")
+		return "", errRequestURLInvalidScheme
 	}
 
 	if parsedURL.Host == "" {
-		return "", errors.New("request URL is missing a host")
+		return "", errRequestURLMissingHost
 	}
 
 	if parsedURL.Fragment != "" {
-		return "", errors.New("request URL cannot contain a fragment")
+		return "", errRequestURLContainsFragment
 	}
 
 	validReqURL := parsedURL.String()
@@ -47,7 +46,7 @@ func ValidateRequestBody(reqBody string) error {
 	reqBodyIsValid := json.Valid([]byte(reqBody))
 
 	if !reqBodyIsValid {
-		return errors.New("request body is invalid")
+		return errRequestBodyInvalid
 	}
 
 	return nil
