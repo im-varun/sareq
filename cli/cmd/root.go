@@ -8,9 +8,11 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:     "sareq",
-	Short:   "SAReq is a CLI-based HTTP client for modern developers",
-	Version: release.Version(),
+	Use:           "sareq",
+	Short:         "SAReq is a CLI-based HTTP client for modern developers",
+	Version:       release.Version(),
+	SilenceErrors: true,
+	SilenceUsage:  true,
 }
 
 func Execute() {
