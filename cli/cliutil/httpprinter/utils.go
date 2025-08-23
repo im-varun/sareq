@@ -24,7 +24,7 @@ func initResponseColoring() *responseColoring {
 		statusFailure: coloring.NewColoredPrinterFunc(color.FgHiRed, color.Bold),
 		headerKey:     coloring.NewColoredPrinterFunc(color.FgHiMagenta),
 		headerValue:   coloring.NewColoredPrinterFunc(color.FgHiWhite),
-		body:          coloring.NewSyntaxHighlighterFunc(color.FgHiYellow),
+		body:          coloring.NewSyntaxHighlighterFunc("terminal16m", "dracula", color.FgHiYellow),
 	}
 }
 

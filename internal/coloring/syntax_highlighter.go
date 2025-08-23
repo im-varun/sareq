@@ -12,25 +12,25 @@ import (
 
 type SyntaxHighlighterFunc func(typ string, format string, a ...any)
 
-func NewSyntaxHighlighterFunc(attrs ...color.Attribute) SyntaxHighlighterFunc {
+func NewSyntaxHighlighterFunc(fmtter string, styling string, fallbackAttrs ...color.Attribute) SyntaxHighlighterFunc {
 	return func(typ string, format string, a ...any) {
-		baseColoredPrinter := NewColoredPrinterFunc(attrs...)
+		fallbackColoredPrinter := NewColoredPrinterFunc(fallbackAttrs...)
 
 		lexer := lexers.Get(typ)
 		if lexer == nil {
-			baseColoredPrinter(format, a...)
+			fallbackColoredPrinter(format, a...)
 			return
 		}
 
-		formatter := formatters.Get("terminal16m")
+		formatter := formatters.Get(fmtter)
 		if formatter == nil {
-			baseColoredPrinter(format, a...)
+			fallbackColoredPrinter(format, a...)
 			return
 		}
 
-		style := styles.Get("dracula")
+		style := styles.Get(styling)
 		if style == nil {
-			baseColoredPrinter(format, a...)
+			fallbackColoredPrinter(format, a...)
 			return
 		}
 
@@ -38,14 +38,14 @@ func NewSyntaxHighlighterFunc(attrs ...color.Attribute) SyntaxHighlighterFunc {
 
 		iterator, err := lexer.Tokenise(nil, str)
 		if err != nil {
-			baseColoredPrinter(format, a...)
+			fallbackColoredPrinter(format, a...)
 			return
 		}
 
 		var buf bytes.Buffer
 		err = formatter.Format(&buf, style, iterator)
 		if err != nil {
-			baseColoredPrinter(format, a...)
+			fallbackColoredPrinter(format, a...)
 			return
 		}
 
