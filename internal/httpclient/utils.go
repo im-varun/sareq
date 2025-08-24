@@ -26,15 +26,15 @@ func ValidateRequestURL(reqURL string) (string, error) {
 	}
 
 	if parsedURL.Scheme != schemeHTTP && parsedURL.Scheme != schemeHTTPS {
-		return "", errRequestURLInvalidScheme
+		return "", errRequestURLSchemeInvalid
 	}
 
 	if parsedURL.Host == "" {
-		return "", errRequestURLMissingHost
+		return "", errRequestURLHostMissing
 	}
 
 	if parsedURL.Fragment != "" {
-		return "", errRequestURLContainsFragment
+		return "", errRequestURLFragmentPresent
 	}
 
 	validReqURL := parsedURL.String()
@@ -43,10 +43,10 @@ func ValidateRequestURL(reqURL string) (string, error) {
 }
 
 func ValidateRequestBody(reqBody string) error {
-	reqBodyIsValid := json.Valid([]byte(reqBody))
+	reqBodyIsValidJSON := json.Valid([]byte(reqBody))
 
-	if !reqBodyIsValid {
-		return errRequestBodyInvalid
+	if !reqBodyIsValidJSON {
+		return errRequestBodyJSONEncodingInvalid
 	}
 
 	return nil

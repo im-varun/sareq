@@ -58,43 +58,43 @@ func TestValidateRequestURL(t *testing.T) {
 			name:           "request url with invalid scheme",
 			reqURL:         "hello://example.com",
 			expectedOutput: "",
-			expectedError:  errRequestURLInvalidScheme,
+			expectedError:  errRequestURLSchemeInvalid,
 		},
 		{
 			name:           "request url with invalid http like scheme",
 			reqURL:         "htt://example.com",
 			expectedOutput: "",
-			expectedError:  errRequestURLInvalidScheme,
+			expectedError:  errRequestURLSchemeInvalid,
 		},
 		{
 			name:           "request url with invalid https like scheme",
 			reqURL:         "htps://example.com",
 			expectedOutput: "",
-			expectedError:  errRequestURLInvalidScheme,
+			expectedError:  errRequestURLSchemeInvalid,
 		},
 		{
 			name:           "request url with valid http scheme and missing host",
 			reqURL:         "http:///path/to/example/resource",
 			expectedOutput: "",
-			expectedError:  errRequestURLMissingHost,
+			expectedError:  errRequestURLHostMissing,
 		},
 		{
 			name:           "request url with valid https scheme and missing host",
 			reqURL:         "https:///path/to/example/resource",
 			expectedOutput: "",
-			expectedError:  errRequestURLMissingHost,
+			expectedError:  errRequestURLHostMissing,
 		},
 		{
 			name:           "request url without valid scheme and missing host",
 			reqURL:         "/path/to/example/resource",
 			expectedOutput: "",
-			expectedError:  errRequestURLMissingHost,
+			expectedError:  errRequestURLHostMissing,
 		},
 		{
 			name:           "request url with fragment",
 			reqURL:         "example.com/path/to/resource#hash",
 			expectedOutput: "",
-			expectedError:  errRequestURLContainsFragment,
+			expectedError:  errRequestURLFragmentPresent,
 		},
 	}
 
@@ -128,7 +128,7 @@ func TestValidateRequestBody(t *testing.T) {
 		{
 			name:          "invalid request body",
 			reqBody:       `{"id": 1, "name": "john doe"}}`,
-			expectedError: errRequestBodyInvalid,
+			expectedError: errRequestBodyJSONEncodingInvalid,
 		},
 		{
 			name:          "valid request body",
@@ -138,7 +138,7 @@ func TestValidateRequestBody(t *testing.T) {
 		{
 			name:          "invalid nested request body",
 			reqBody:       `{"id": 1, "person": {"firstname": "john", "lastname": "doe"}`,
-			expectedError: errRequestBodyInvalid,
+			expectedError: errRequestBodyJSONEncodingInvalid,
 		},
 		{
 			name:          "valid nested request body",

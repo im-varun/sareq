@@ -1,6 +1,7 @@
 package httpclient
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 )
@@ -20,19 +21,19 @@ func NewClient(timeout int) *Client {
 func (c *Client) Execute(reqMethod string, reqURL string, reqBody string, reqHeader map[string]string) (*Response, error) {
 	req, err := newRequest(reqMethod, reqURL, reqBody, reqHeader)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("unable to create a request: %w", err)
 	}
 
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("unable to connect to %s: %w", reqURL, normalizeHTTPError(err))
 	}
 	defer resp.Body.Close()
 
-	respData, err := parseResponse(resp)
+	response, err := parseResponse(resp)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("unable to parse response: %w", err)
 	}
 
-	return respData, nil
+	return response, nil
 }

@@ -1,15 +1,40 @@
 package httpclient
 
-import "errors"
+import (
+	"errors"
+	"net"
+)
 
-var errRequestURLEmpty error = errors.New("request URL cannot be empty")
+var (
+	errRequestURLEmpty           = errors.New("is empty")
+	errRequestURLParsingFailed   = errors.New("parsing failed")
+	errRequestURLSchemeInvalid   = errors.New("contains a scheme that is invalid or not supported by the client")
+	errRequestURLHostMissing     = errors.New("is missing a host")
+	errRequestURLFragmentPresent = errors.New("contains a fragment")
 
-var errRequestURLParsingFailed error = errors.New("failed to parse request URL")
+	errRequestBodyJSONEncodingInvalid = errors.New("not a valid JSON encoding")
 
-var errRequestURLInvalidScheme error = errors.New("request URL contains a scheme that is invalid or not supported by the client")
+	errRequestTimeout             = errors.New("request timed out")
+	errRequestDNSResolutionFailed = errors.New("domain name could not be resolved")
+)
 
-var errRequestURLMissingHost error = errors.New("request URL is missing a host")
+func normalizeHTTPError(err error) error {
+	switch {
+	case isTimeoutError(err):
+		return errRequestTimeout
+	case isDNSResolutionError(err):
+		return errRequestDNSResolutionFailed
+	default:
+		return err
+	}
+}
 
-var errRequestURLContainsFragment error = errors.New("request URL cannot contain a fragment")
+func isTimeoutError(err error) bool {
+	netErr, ok := err.(net.Error)
+	return ok && netErr.Timeout()
+}
 
-var errRequestBodyInvalid error = errors.New("request body is invalid")
+func isDNSResolutionError(err error) bool {
+	var dnsErr *net.DNSError
+	return errors.As(err, &dnsErr) && dnsErr.IsNotFound
+}
