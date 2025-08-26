@@ -19,6 +19,9 @@ func RegisterRequestFlags(reqCmd *cobra.Command) {
 	commandName := reqCmd.Name()
 	if commandName == "post" || commandName == "put" || commandName == "patch" {
 		reqCmd.MarkFlagRequired("body")
+
+		bodyFlag := reqCmd.Flags().Lookup("body")
+		bodyFlag.Usage = bodyFlag.Usage + " (required)"
 	}
 }
 
