@@ -27,6 +27,7 @@ var deleteCmd = &cobra.Command{
 func init() {
 	flags.RegisterRequestFlags(deleteCmd)
 	flags.RegisterResponseFormattingFlags(deleteCmd)
+	flags.DisableSorting(deleteCmd)
 
 	rootCmd.AddCommand(deleteCmd)
 }

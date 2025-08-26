@@ -27,6 +27,7 @@ var putCmd = &cobra.Command{
 func init() {
 	flags.RegisterRequestFlags(putCmd)
 	flags.RegisterResponseFormattingFlags(putCmd)
+	flags.DisableSorting(putCmd)
 
 	rootCmd.AddCommand(putCmd)
 }

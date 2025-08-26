@@ -27,6 +27,7 @@ var patchCmd = &cobra.Command{
 func init() {
 	flags.RegisterRequestFlags(patchCmd)
 	flags.RegisterResponseFormattingFlags(patchCmd)
+	flags.DisableSorting(patchCmd)
 
 	rootCmd.AddCommand(patchCmd)
 }

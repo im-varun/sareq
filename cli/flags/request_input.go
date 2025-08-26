@@ -12,9 +12,9 @@ var reqBody string
 var reqHeader map[string]string
 
 func RegisterRequestFlags(reqCmd *cobra.Command) {
-	reqCmd.Flags().IntVarP(&reqTimeout, "timeout", "t", httpclient.DefaultTimeoutSeconds, "set timeout for HTTP request")
 	reqCmd.Flags().StringVarP(&reqBody, "body", "B", "", "set body to send with HTTP request")
 	reqCmd.Flags().StringToStringVarP(&reqHeader, "header", "H", nil, "set header to send with HTTP request")
+	reqCmd.Flags().IntVarP(&reqTimeout, "timeout", "t", httpclient.DefaultTimeoutSeconds, "set timeout for HTTP request")
 
 	commandName := reqCmd.Name()
 	if commandName == "post" || commandName == "put" || commandName == "patch" {
