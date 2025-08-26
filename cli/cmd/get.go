@@ -8,7 +8,7 @@ import (
 )
 
 var getCmd = &cobra.Command{
-	Use:     "get <url>",
+	Use:     "get URL",
 	Aliases: []string{"GET"},
 	Short:   "Send HTTP GET request to the specified URL",
 	Args:    cobra.ExactArgs(1),

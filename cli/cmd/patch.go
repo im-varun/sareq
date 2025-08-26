@@ -8,7 +8,7 @@ import (
 )
 
 var patchCmd = &cobra.Command{
-	Use:     "patch <url>",
+	Use:     "patch URL --body BODY",
 	Aliases: []string{"PATCH"},
 	Short:   "Send HTTP PATCH request to the specified URL",
 	Args:    cobra.ExactArgs(1),

@@ -8,7 +8,7 @@ import (
 )
 
 var deleteCmd = &cobra.Command{
-	Use:     "delete <url>",
+	Use:     "delete URL",
 	Aliases: []string{"DELETE"},
 	Short:   "Send HTTP DELETE request to the specified URL",
 	Args:    cobra.ExactArgs(1),

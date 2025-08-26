@@ -8,7 +8,7 @@ import (
 )
 
 var putCmd = &cobra.Command{
-	Use:     "put <url>",
+	Use:     "put URL --body BODY",
 	Aliases: []string{"PUT"},
 	Short:   "Send HTTP PUT request to the specified URL",
 	Args:    cobra.ExactArgs(1),
