@@ -17,9 +17,9 @@ var rootCmd = &cobra.Command{
 }
 
 func Execute() {
-	err := rootCmd.Execute()
+	cmd, err := rootCmd.ExecuteC()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "error: %v\n", err)
+		fmt.Fprintf(os.Stderr, "error: %v\n\nRun '%s --help' for more information\n", err, cmd.CommandPath())
 		os.Exit(1)
 	}
 }
