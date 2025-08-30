@@ -37,9 +37,9 @@ func ValidateRequestURL(reqURL string) (string, error) {
 		return "", errRequestURLFragmentPresent
 	}
 
-	validReqURL := parsedURL.String()
+	validatedReqURL := parsedURL.String()
 
-	return validReqURL, nil
+	return validatedReqURL, nil
 }
 
 func ValidateRequestBody(reqBody string) error {
