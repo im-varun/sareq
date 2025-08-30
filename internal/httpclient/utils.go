@@ -6,46 +6,39 @@ import (
 	"strings"
 )
 
-func ValidateRequestURL(reqURL string) (string, error) {
+func ValidateRequestURL(reqURL string) error {
 	if reqURL == "" || len(strings.TrimSpace(reqURL)) == 0 {
-		return "", errRequestURLEmpty
+		return errRequestURLEmpty
 	}
 
 	parsedURL, err := url.Parse(reqURL)
 	if err != nil {
-		return "", errRequestURLParsingFailed
+		return errRequestURLParsingFailed
 	}
 
 	if parsedURL.Scheme == "" {
-		parsedURL.Scheme = defaultScheme
-
-		parsedURL, err = url.Parse(parsedURL.String())
-		if err != nil {
-			return "", errRequestURLParsingFailed
-		}
+		return errRequestURLSchemeMissing
 	}
 
 	if parsedURL.Scheme != schemeHTTP && parsedURL.Scheme != schemeHTTPS {
-		return "", errRequestURLSchemeInvalid
+		return errRequestURLSchemeInvalid
 	}
 
 	if parsedURL.Host == "" {
-		return "", errRequestURLHostMissing
+		return errRequestURLHostMissing
 	}
 
 	if parsedURL.Fragment != "" {
-		return "", errRequestURLFragmentPresent
+		return errRequestURLFragmentPresent
 	}
 
-	validatedReqURL := parsedURL.String()
-
-	return validatedReqURL, nil
+	return nil
 }
 
 func ValidateRequestBody(reqBody string) error {
-	reqBodyIsValidJSON := json.Valid([]byte(reqBody))
+	isValidJSON := json.Valid([]byte(reqBody))
 
-	if !reqBodyIsValidJSON {
+	if !isValidJSON {
 		return errRequestBodyJSONEncodingInvalid
 	}
 

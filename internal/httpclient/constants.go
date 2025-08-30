@@ -5,6 +5,4 @@ const (
 
 	schemeHTTP  string = "http"
 	schemeHTTPS string = "https"
-
-	defaultScheme string = schemeHTTPS
 )

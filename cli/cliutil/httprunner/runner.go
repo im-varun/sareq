@@ -7,7 +7,7 @@ import (
 )
 
 func Run(reqMethod string, reqURL string, reqBody string, reqHeader map[string]string, reqTimeout int) (*httpclient.Response, error) {
-	validatedReqURL, err := httpclient.ValidateRequestURL(reqURL)
+	err := httpclient.ValidateRequestURL(reqURL)
 	if err != nil {
 		return nil, fmt.Errorf("request URL '%s' is invalid: %w", reqURL, err)
 	}
@@ -21,7 +21,7 @@ func Run(reqMethod string, reqURL string, reqBody string, reqHeader map[string]s
 
 	client := httpclient.NewClient(reqTimeout)
 
-	resp, err := client.Execute(reqMethod, validatedReqURL, reqBody, reqHeader)
+	resp, err := client.Execute(reqMethod, reqURL, reqBody, reqHeader)
 	if err != nil {
 		return nil, err
 	}

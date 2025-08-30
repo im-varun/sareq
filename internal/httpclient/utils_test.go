@@ -7,100 +7,100 @@ import (
 
 func TestValidateRequestURL(t *testing.T) {
 	var tests = []struct {
-		name           string
-		reqURL         string
-		expectedOutput string
-		expectedError  error
+		name          string
+		reqURL        string
+		expectedError error
 	}{
 		{
-			name:           "empty request url with no spaces",
-			reqURL:         "",
-			expectedOutput: "",
-			expectedError:  errRequestURLEmpty,
+			name:          "empty request url with no spaces",
+			reqURL:        "",
+			expectedError: errRequestURLEmpty,
 		},
 		{
-			name:           "empty request url with spaces",
-			reqURL:         "    ",
-			expectedOutput: "",
-			expectedError:  errRequestURLEmpty,
+			name:          "empty request url with spaces",
+			reqURL:        "    ",
+			expectedError: errRequestURLEmpty,
 		},
 		{
-			name:           "request url containing only scheme delimiter",
-			reqURL:         "://",
-			expectedOutput: "",
-			expectedError:  errRequestURLParsingFailed,
+			name:          "request url containing only scheme delimiter",
+			reqURL:        "://",
+			expectedError: errRequestURLParsingFailed,
 		},
 		{
-			name:           "request url with scheme delimiter and without scheme",
-			reqURL:         "://example.com",
-			expectedOutput: "",
-			expectedError:  errRequestURLParsingFailed,
+			name:          "request url with scheme delimiter and without scheme",
+			reqURL:        "://example.com",
+			expectedError: errRequestURLParsingFailed,
 		},
 		{
-			name:           "request url without scheme",
-			reqURL:         "example.com",
-			expectedOutput: defaultScheme + "://example.com",
-			expectedError:  nil,
+			name:          "request url without scheme",
+			reqURL:        "example.com",
+			expectedError: errRequestURLSchemeMissing,
 		},
 		{
-			name:           "request url with valid http scheme",
-			reqURL:         "http://example.com",
-			expectedOutput: "http://example.com",
-			expectedError:  nil,
+			name:          "request url with valid http scheme",
+			reqURL:        "http://example.com",
+			expectedError: nil,
 		},
 		{
-			name:           "request url with valid https scheme",
-			reqURL:         "https://example.com",
-			expectedOutput: "https://example.com",
-			expectedError:  nil,
+			name:          "request url with valid https scheme",
+			reqURL:        "https://example.com",
+			expectedError: nil,
 		},
 		{
-			name:           "request url with invalid scheme",
-			reqURL:         "hello://example.com",
-			expectedOutput: "",
-			expectedError:  errRequestURLSchemeInvalid,
+			name:          "request url with invalid scheme",
+			reqURL:        "hello://example.com",
+			expectedError: errRequestURLSchemeInvalid,
 		},
 		{
-			name:           "request url with invalid http like scheme",
-			reqURL:         "htt://example.com",
-			expectedOutput: "",
-			expectedError:  errRequestURLSchemeInvalid,
+			name:          "request url with invalid http like scheme",
+			reqURL:        "htt://example.com",
+			expectedError: errRequestURLSchemeInvalid,
 		},
 		{
-			name:           "request url with invalid https like scheme",
-			reqURL:         "htps://example.com",
-			expectedOutput: "",
-			expectedError:  errRequestURLSchemeInvalid,
+			name:          "request url with invalid https like scheme",
+			reqURL:        "htps://example.com",
+			expectedError: errRequestURLSchemeInvalid,
 		},
 		{
-			name:           "request url with valid http scheme and missing host",
-			reqURL:         "http:///path/to/example/resource",
-			expectedOutput: "",
-			expectedError:  errRequestURLHostMissing,
+			name:          "request url with valid http scheme and missing host",
+			reqURL:        "http:///path/to/example/resource",
+			expectedError: errRequestURLHostMissing,
 		},
 		{
-			name:           "request url with valid https scheme and missing host",
-			reqURL:         "https:///path/to/example/resource",
-			expectedOutput: "",
-			expectedError:  errRequestURLHostMissing,
+			name:          "request url with valid https scheme and missing host",
+			reqURL:        "https:///path/to/example/resource",
+			expectedError: errRequestURLHostMissing,
 		},
 		{
-			name:           "request url without valid scheme and missing host",
-			reqURL:         "/path/to/example/resource",
-			expectedOutput: "",
-			expectedError:  errRequestURLHostMissing,
+			name:          "request url without valid scheme and missing host",
+			reqURL:        "/path/to/example/resource",
+			expectedError: errRequestURLSchemeMissing,
 		},
 		{
-			name:           "request url with fragment",
-			reqURL:         "example.com/path/to/resource#hash",
-			expectedOutput: "",
-			expectedError:  errRequestURLFragmentPresent,
+			name:          "request url with valid http scheme and fragment",
+			reqURL:        "http://example.com/path/to/resource#hash",
+			expectedError: errRequestURLFragmentPresent,
+		},
+		{
+			name:          "request url with valid https scheme and fragment",
+			reqURL:        "https://example.com/path/to/resource#hash",
+			expectedError: errRequestURLFragmentPresent,
+		},
+		{
+			name:          "request url with localhost",
+			reqURL:        "http://localhost/hello",
+			expectedError: nil,
+		},
+		{
+			name:          "request url with localhost and port",
+			reqURL:        "http://localhost:8000/hello",
+			expectedError: nil,
 		},
 	}
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			output, err := ValidateRequestURL(test.reqURL)
+			err := ValidateRequestURL(test.reqURL)
 			if err == nil {
 				err = errors.New("")
 			}
@@ -112,10 +112,6 @@ func TestValidateRequestURL(t *testing.T) {
 
 			if err.Error() != testErr.Error() {
 				t.Errorf("expected error: \"%s\", got error: \"%s\"", test.expectedError, err.Error())
-			}
-
-			if output != test.expectedOutput {
-				t.Errorf("expected output: \"%s\", got output: \"%s\"", test.expectedOutput, output)
 			}
 		})
 	}

@@ -8,6 +8,7 @@ import (
 var (
 	errRequestURLEmpty           = errors.New("is empty")
 	errRequestURLParsingFailed   = errors.New("parsing failed")
+	errRequestURLSchemeMissing   = errors.New("is missing a scheme")
 	errRequestURLSchemeInvalid   = errors.New("contains a scheme that is invalid or not supported by the client")
 	errRequestURLHostMissing     = errors.New("is missing a host")
 	errRequestURLFragmentPresent = errors.New("contains a fragment")
@@ -19,14 +20,15 @@ var (
 )
 
 func normalizeHTTPError(err error) error {
-	switch {
-	case isTimeoutError(err):
+	if isTimeoutError(err) {
 		return errRequestTimeout
-	case isDNSResolutionError(err):
-		return errRequestDNSResolutionFailed
-	default:
-		return err
 	}
+
+	if isDNSResolutionError(err) {
+		return errRequestDNSResolutionFailed
+	}
+
+	return err
 }
 
 func isTimeoutError(err error) bool {
