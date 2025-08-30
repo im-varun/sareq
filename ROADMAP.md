@@ -16,7 +16,6 @@ Target release date: October 29, 2025
 - Add HTTP Requests Registry
   - Support saving HTTP requests to a local registry (HTTP Requests Registry)
   - Ability to run saved requests from the local registry (HTTP Requests Registry)
-- Add custom logger for logging activity of the application
 - Add support for input from files
 - Add support for output to files
 - Add support for passing URL query strings separately using a flag as a convenience
