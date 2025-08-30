@@ -101,15 +101,17 @@ func TestValidateRequestURL(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			output, err := ValidateRequestURL(test.reqURL)
-			if err != nil {
-				testErr := test.expectedError
-				if testErr == nil {
-					testErr = errors.New("")
-				}
+			if err == nil {
+				err = errors.New("")
+			}
 
-				if err.Error() != testErr.Error() {
-					t.Errorf("expected error: \"%s\", got error: \"%s\"", test.expectedError, err.Error())
-				}
+			testErr := test.expectedError
+			if testErr == nil {
+				testErr = errors.New("")
+			}
+
+			if err.Error() != testErr.Error() {
+				t.Errorf("expected error: \"%s\", got error: \"%s\"", test.expectedError, err.Error())
 			}
 
 			if output != test.expectedOutput {
@@ -150,15 +152,17 @@ func TestValidateRequestBody(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			err := ValidateRequestBody(test.reqBody)
-			if err != nil {
-				testErr := test.expectedError
-				if testErr == nil {
-					testErr = errors.New("")
-				}
+			if err == nil {
+				err = errors.New("")
+			}
 
-				if err.Error() != testErr.Error() {
-					t.Errorf("expected error: \"%s\", got error: \"%s\"", test.expectedError, err.Error())
-				}
+			testErr := test.expectedError
+			if testErr == nil {
+				testErr = errors.New("")
+			}
+
+			if err.Error() != testErr.Error() {
+				t.Errorf("expected error: \"%s\", got error: \"%s\"", test.expectedError, err.Error())
 			}
 		})
 	}
