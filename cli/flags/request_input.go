@@ -7,10 +7,16 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// reqTimeout stores the value passed to the --timeout (or -t) flag
 var reqTimeout int
+
+// reqBody stores the value passed to the --body (or -B) flag
 var reqBody string
+
+// reqHeader stores value passed to the --header (or -H) flag
 var reqHeader map[string]string
 
+// RegisterRequestFlags registers HTTP request related flags with the specified request command.
 func RegisterRequestFlags(reqCmd *cobra.Command) {
 	reqCmd.Flags().StringVarP(&reqBody, "body", "B", "", "set body to send with HTTP request (e.g '{\"key1\": int, \"key2\": \"string\"}')")
 	reqCmd.Flags().StringToStringVarP(&reqHeader, "header", "H", nil, "set header to send with HTTP request (e.g key=value or \"key=value\")")
@@ -25,14 +31,17 @@ func RegisterRequestFlags(reqCmd *cobra.Command) {
 	}
 }
 
+// RequestTimeout returns the value stored in the request timeout flag (--timeout or -t).
 func RequestTimeout() int {
 	return reqTimeout
 }
 
+// RequestBody returns the value stored in the request body flag (--body or -B).
 func RequestBody() string {
 	return reqBody
 }
 
+// RequestHeader returns the value stored in the request header flag (--header or -H).
 func RequestHeader() map[string]string {
 	headerCopy := make(map[string]string, len(reqHeader))
 

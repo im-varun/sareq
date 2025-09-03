@@ -5,6 +5,7 @@ import (
 	"testing"
 )
 
+// TestValidateRequestURL tests the ValidateRequestURL function.
 func TestValidateRequestURL(t *testing.T) {
 	var tests = []struct {
 		name          string
@@ -117,6 +118,7 @@ func TestValidateRequestURL(t *testing.T) {
 	}
 }
 
+// TestValidateRequestBody tests the ValidateRequestBody function.
 func TestValidateRequestBody(t *testing.T) {
 	var tests = []struct {
 		name          string

@@ -8,6 +8,8 @@ import (
 	"github.com/im-varun/sareq/internal/coloring"
 )
 
+// responseColoring is a collection of custom coloring functions used to print different parts
+// of an HTTP response.
 type responseColoring struct {
 	protocol      coloring.ColoredPrinterFunc
 	statusSuccess coloring.ColoredPrinterFunc
@@ -17,6 +19,9 @@ type responseColoring struct {
 	body          coloring.SyntaxHighlighterFunc
 }
 
+// initResponseColoring creates and returns a new responseColoring instance containing a
+// collection of custom coloring functions used for printing different parts of an HTTP
+// response.
 func initResponseColoring() *responseColoring {
 	return &responseColoring{
 		protocol:      coloring.NewColoredPrinterFunc(color.FgHiCyan, color.Bold),
@@ -28,7 +33,8 @@ func initResponseColoring() *responseColoring {
 	}
 }
 
-func (rc *responseColoring) disableColors() {
+// disable disables the coloring functions contained in the responseColoring instance.
+func (rc *responseColoring) disable() {
 	rc.protocol = coloring.NoColoredPrinterFunc()
 	rc.statusSuccess = coloring.NoColoredPrinterFunc()
 	rc.statusFailure = coloring.NoColoredPrinterFunc()
@@ -37,6 +43,7 @@ func (rc *responseColoring) disableColors() {
 	rc.body = coloring.NoSyntaxHighlighterFunc()
 }
 
+// prettifyResponseBody prettifies a JSON response body.
 func prettifyResponseBody(respBody string) (string, error) {
 	var prettyBodyBuf bytes.Buffer
 

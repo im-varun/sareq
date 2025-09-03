@@ -6,6 +6,8 @@ import (
 	"strings"
 )
 
+// newRequest creates and returns a new http.Request instance (from net/http) using the
+// specified request method, URL, body and header.
 func newRequest(reqMethod string, reqURL string, reqBody string, reqHeader map[string]string) (*http.Request, error) {
 	method := strings.ToUpper(reqMethod)
 

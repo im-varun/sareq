@@ -10,8 +10,12 @@ import (
 	"github.com/fatih/color"
 )
 
+// SyntaxHighlighterFunc defines a function type for printing formatted strings with complex
+// syntax highlighting.
 type SyntaxHighlighterFunc func(typ string, format string, a ...any)
 
+// NewSyntaxHighlighterFunc creates and returns a SyntaxHighlighterFunc that prints text with
+// the specified syntax highlighting attributes.
 func NewSyntaxHighlighterFunc(fmtter string, styling string, fallbackAttrs ...color.Attribute) SyntaxHighlighterFunc {
 	return func(typ string, format string, a ...any) {
 		fallbackColoredPrinter := NewColoredPrinterFunc(fallbackAttrs...)
@@ -53,6 +57,8 @@ func NewSyntaxHighlighterFunc(fmtter string, styling string, fallbackAttrs ...co
 	}
 }
 
+// NoSyntaxHighlighterFunc creates and returns a SyntaxHighlighterFunc that prints text without
+// any syntax highlighting attributes.
 func NoSyntaxHighlighterFunc() SyntaxHighlighterFunc {
 	return func(typ string, format string, a ...any) {
 		fmt.Printf(format, a...)

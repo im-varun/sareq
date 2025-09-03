@@ -9,11 +9,13 @@ import (
 	"github.com/im-varun/sareq/internal/httpclient"
 )
 
+// Print prints the specified HTTP response with/without coloring and JSON prettification
+// formatting.
 func Print(resp *httpclient.Response, respNoColor bool, respNoPrettify bool) {
 	respColoring := initResponseColoring()
 
 	if respNoColor {
-		respColoring.disableColors()
+		respColoring.disable()
 	}
 
 	respColoring.protocol("%s ", resp.Protocol())

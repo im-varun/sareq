@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// ValidateRequestURL validates that the specified request URL is in a proper format.
 func ValidateRequestURL(reqURL string) error {
 	if reqURL == "" || len(strings.TrimSpace(reqURL)) == 0 {
 		return errRequestURLEmpty
@@ -35,6 +36,7 @@ func ValidateRequestURL(reqURL string) error {
 	return nil
 }
 
+// ValidateRequestBody validates that the request body is a valid JSON encoding.
 func ValidateRequestBody(reqBody string) error {
 	isValidJSON := json.Valid([]byte(reqBody))
 
