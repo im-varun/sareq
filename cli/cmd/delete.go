@@ -11,6 +11,7 @@ var deleteCmd = &cobra.Command{
 	Use:     "delete URL",
 	Aliases: []string{"DELETE"},
 	Short:   "Send HTTP DELETE request to the specified URL",
+	Example: deleteCmdExample,
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resp, err := httprunner.Run(cmd.Name(), args[0], flags.RequestBody(), flags.RequestHeader(), flags.RequestTimeout())
@@ -23,6 +24,13 @@ var deleteCmd = &cobra.Command{
 		return nil
 	},
 }
+
+var deleteCmdExample = `
+# basic DELETE request
+sareq delete https://api.example.com/users/user123
+
+# DELETE request with header
+sareq put https://api.example.com/users/user123 --header "Authorization=abc123"`
 
 func init() {
 	flags.RegisterRequestFlags(deleteCmd)

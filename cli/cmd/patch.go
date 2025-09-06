@@ -11,6 +11,7 @@ var patchCmd = &cobra.Command{
 	Use:     "patch URL --body BODY",
 	Aliases: []string{"PATCH"},
 	Short:   "Send HTTP PATCH request to the specified URL",
+	Example: patchCmdExample,
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resp, err := httprunner.Run(cmd.Name(), args[0], flags.RequestBody(), flags.RequestHeader(), flags.RequestTimeout())
@@ -23,6 +24,13 @@ var patchCmd = &cobra.Command{
 		return nil
 	},
 }
+
+var patchCmdExample = `
+# basic PATCH request
+sareq patch https://api.example.com/users/user123 --body '{"email": "john@example.com"}'
+
+# PATCH request with header
+sareq patch https://api.example.com/users/user123 --header "Authorization=abc123" --body '{"email": "john@example.com"}'`
 
 func init() {
 	flags.RegisterRequestFlags(patchCmd)

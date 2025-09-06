@@ -11,6 +11,7 @@ var postCmd = &cobra.Command{
 	Use:     "post URL --body BODY",
 	Aliases: []string{"POST"},
 	Short:   "Send HTTP POST request to the specified URL",
+	Example: postCmdExample,
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resp, err := httprunner.Run(cmd.Name(), args[0], flags.RequestBody(), flags.RequestHeader(), flags.RequestTimeout())
@@ -23,6 +24,16 @@ var postCmd = &cobra.Command{
 		return nil
 	},
 }
+
+var postCmdExample = `
+# basic POST request
+sareq post https://api.example.com/users --body '{"name": "John Doe"}'
+
+# POST request with timeout of 5 seconds
+sareq post https://api.example.com/users --body '{"name": "John Doe"}' --timeout 5
+
+# POST request with headers
+sareq post https://api.example.com/users --header "Authorization=abc123" --header "Content-Type=application/json" --body '{"name": "John Doe"}'`
 
 func init() {
 	flags.RegisterRequestFlags(postCmd)

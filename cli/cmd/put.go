@@ -11,6 +11,7 @@ var putCmd = &cobra.Command{
 	Use:     "put URL --body BODY",
 	Aliases: []string{"PUT"},
 	Short:   "Send HTTP PUT request to the specified URL",
+	Example: putCmdExample,
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resp, err := httprunner.Run(cmd.Name(), args[0], flags.RequestBody(), flags.RequestHeader(), flags.RequestTimeout())
@@ -23,6 +24,13 @@ var putCmd = &cobra.Command{
 		return nil
 	},
 }
+
+var putCmdExample = `
+# basic PUT request
+sareq put https://api.example.com/users/user123 --body '{"name": "John Doe"}'
+
+# PUT request with header
+sareq put https://api.example.com/users/user123 --header "Authorization=abc123" --body '{"name": "John Doe"}'`
 
 func init() {
 	flags.RegisterRequestFlags(putCmd)
