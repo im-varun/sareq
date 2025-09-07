@@ -11,6 +11,7 @@ var postCmd = &cobra.Command{
 	Use:     "post URL --body BODY",
 	Aliases: []string{"POST"},
 	Short:   "Send HTTP POST request to the specified URL",
+	GroupID: "http request",
 	Example: postCmdExample,
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {

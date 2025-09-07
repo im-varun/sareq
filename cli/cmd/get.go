@@ -11,6 +11,7 @@ var getCmd = &cobra.Command{
 	Use:     "get URL",
 	Aliases: []string{"GET"},
 	Short:   "Send HTTP GET request to the specified URL",
+	GroupID: "http request",
 	Example: getCmdExample,
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {

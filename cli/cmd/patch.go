@@ -11,6 +11,7 @@ var patchCmd = &cobra.Command{
 	Use:     "patch URL --body BODY",
 	Aliases: []string{"PATCH"},
 	Short:   "Send HTTP PATCH request to the specified URL",
+	GroupID: "http request",
 	Example: patchCmdExample,
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {

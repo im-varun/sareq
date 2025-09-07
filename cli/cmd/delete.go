@@ -11,6 +11,7 @@ var deleteCmd = &cobra.Command{
 	Use:     "delete URL",
 	Aliases: []string{"DELETE"},
 	Short:   "Send HTTP DELETE request to the specified URL",
+	GroupID: "http request",
 	Example: deleteCmdExample,
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
