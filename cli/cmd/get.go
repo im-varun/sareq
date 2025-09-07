@@ -25,7 +25,15 @@ var getCmd = &cobra.Command{
 	},
 }
 
-var getCmdExample = `
+func init() {
+	flags.RegisterRequestFlags(getCmd)
+	flags.RegisterResponseFormattingFlags(getCmd)
+	flags.DisableSorting(getCmd)
+
+	rootCmd.AddCommand(getCmd)
+}
+
+const getCmdExample string = `
 # basic GET request
 sareq get https://api.example.com/users/user123
 
@@ -34,11 +42,3 @@ sareq get https://api.example.com/users/user123 --timeout 5
 
 # GET request with header
 sareq get https://api.example.com/users/user123 --header "Authorization=abc123"`
-
-func init() {
-	flags.RegisterRequestFlags(getCmd)
-	flags.RegisterResponseFormattingFlags(getCmd)
-	flags.DisableSorting(getCmd)
-
-	rootCmd.AddCommand(getCmd)
-}

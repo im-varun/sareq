@@ -25,7 +25,15 @@ var postCmd = &cobra.Command{
 	},
 }
 
-var postCmdExample = `
+func init() {
+	flags.RegisterRequestFlags(postCmd)
+	flags.RegisterResponseFormattingFlags(postCmd)
+	flags.DisableSorting(postCmd)
+
+	rootCmd.AddCommand(postCmd)
+}
+
+const postCmdExample string = `
 # basic POST request
 sareq post https://api.example.com/users --body '{"name": "John Doe"}'
 
@@ -34,11 +42,3 @@ sareq post https://api.example.com/users --body '{"name": "John Doe"}' --timeout
 
 # POST request with headers
 sareq post https://api.example.com/users --header "Authorization=abc123" --header "Content-Type=application/json" --body '{"name": "John Doe"}'`
-
-func init() {
-	flags.RegisterRequestFlags(postCmd)
-	flags.RegisterResponseFormattingFlags(postCmd)
-	flags.DisableSorting(postCmd)
-
-	rootCmd.AddCommand(postCmd)
-}

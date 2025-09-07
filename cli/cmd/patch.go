@@ -25,13 +25,6 @@ var patchCmd = &cobra.Command{
 	},
 }
 
-var patchCmdExample = `
-# basic PATCH request
-sareq patch https://api.example.com/users/user123 --body '{"email": "john@example.com"}'
-
-# PATCH request with header
-sareq patch https://api.example.com/users/user123 --header "Authorization=abc123" --body '{"email": "john@example.com"}'`
-
 func init() {
 	flags.RegisterRequestFlags(patchCmd)
 	flags.RegisterResponseFormattingFlags(patchCmd)
@@ -39,3 +32,10 @@ func init() {
 
 	rootCmd.AddCommand(patchCmd)
 }
+
+const patchCmdExample string = `
+# basic PATCH request
+sareq patch https://api.example.com/users/user123 --body '{"email": "john@example.com"}'
+
+# PATCH request with header
+sareq patch https://api.example.com/users/user123 --header "Authorization=abc123" --body '{"email": "john@example.com"}'`

@@ -25,13 +25,6 @@ var deleteCmd = &cobra.Command{
 	},
 }
 
-var deleteCmdExample = `
-# basic DELETE request
-sareq delete https://api.example.com/users/user123
-
-# DELETE request with header
-sareq put https://api.example.com/users/user123 --header "Authorization=abc123"`
-
 func init() {
 	flags.RegisterRequestFlags(deleteCmd)
 	flags.RegisterResponseFormattingFlags(deleteCmd)
@@ -39,3 +32,10 @@ func init() {
 
 	rootCmd.AddCommand(deleteCmd)
 }
+
+const deleteCmdExample string = `
+# basic DELETE request
+sareq delete https://api.example.com/users/user123
+
+# DELETE request with header
+sareq delete https://api.example.com/users/user123 --header "Authorization=abc123"`

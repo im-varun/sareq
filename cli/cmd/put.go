@@ -25,13 +25,6 @@ var putCmd = &cobra.Command{
 	},
 }
 
-var putCmdExample = `
-# basic PUT request
-sareq put https://api.example.com/users/user123 --body '{"name": "John Doe"}'
-
-# PUT request with header
-sareq put https://api.example.com/users/user123 --header "Authorization=abc123" --body '{"name": "John Doe"}'`
-
 func init() {
 	flags.RegisterRequestFlags(putCmd)
 	flags.RegisterResponseFormattingFlags(putCmd)
@@ -39,3 +32,10 @@ func init() {
 
 	rootCmd.AddCommand(putCmd)
 }
+
+const putCmdExample string = `
+# basic PUT request
+sareq put https://api.example.com/users/user123 --body '{"name": "John Doe"}'
+
+# PUT request with header
+sareq put https://api.example.com/users/user123 --header "Authorization=abc123" --body '{"name": "John Doe"}'`
