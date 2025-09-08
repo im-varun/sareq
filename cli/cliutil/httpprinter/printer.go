@@ -21,10 +21,9 @@ func Print(resp *httpclient.Response, respNoColor bool, respNoPrettify bool) {
 	respColoring.protocol("%s ", resp.Protocol())
 
 	statusCode := resp.StatusCode()
-	switch {
-	case statusCode >= 200 && statusCode < 300:
+	if statusCode >= 200 && statusCode < 300 {
 		respColoring.statusSuccess("%s\n", resp.Status())
-	default:
+	} else {
 		respColoring.statusFailure("%s\n", resp.Status())
 	}
 
