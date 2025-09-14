@@ -34,8 +34,7 @@ func init() {
 	rootCmd.AddCommand(getCmd)
 }
 
-const getCmdExample string = `
-# basic GET request
+const getCmdExample string = `# basic GET request
 sareq get https://api.example.com/users/user123
 
 # GET request with timeout of 5 seconds

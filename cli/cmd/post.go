@@ -34,8 +34,7 @@ func init() {
 	rootCmd.AddCommand(postCmd)
 }
 
-const postCmdExample string = `
-# basic POST request
+const postCmdExample string = `# basic POST request
 sareq post https://api.example.com/users --body '{"name": "John Doe"}'
 
 # POST request with timeout of 5 seconds

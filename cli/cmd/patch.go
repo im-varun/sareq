@@ -34,8 +34,7 @@ func init() {
 	rootCmd.AddCommand(patchCmd)
 }
 
-const patchCmdExample string = `
-# basic PATCH request
+const patchCmdExample string = `# basic PATCH request
 sareq patch https://api.example.com/users/user123 --body '{"email": "john@example.com"}'
 
 # PATCH request with header

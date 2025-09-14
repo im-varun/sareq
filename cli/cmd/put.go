@@ -34,8 +34,7 @@ func init() {
 	rootCmd.AddCommand(putCmd)
 }
 
-const putCmdExample string = `
-# basic PUT request
+const putCmdExample string = `# basic PUT request
 sareq put https://api.example.com/users/user123 --body '{"name": "John Doe"}'
 
 # PUT request with header

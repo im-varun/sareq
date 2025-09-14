@@ -34,8 +34,7 @@ func init() {
 	rootCmd.AddCommand(deleteCmd)
 }
 
-const deleteCmdExample string = `
-# basic DELETE request
+const deleteCmdExample string = `# basic DELETE request
 sareq delete https://api.example.com/users/user123
 
 # DELETE request with header
