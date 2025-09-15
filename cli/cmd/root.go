@@ -16,6 +16,10 @@ var rootCmd = &cobra.Command{
 	SilenceUsage:  true,
 }
 
+func Root() *cobra.Command {
+	return rootCmd
+}
+
 // Execute executes the root command of the application.
 func Execute() {
 	err := rootCmd.Execute()
