@@ -1,19 +1,15 @@
 # Development Roadmap
 
-This document outlines the development roadmap for SAReq.
+This document outlines the tentative development roadmap for SAReq.
 
-## Initial Development Phase (July 2025 to October 2025)
+## Releases
 
-- Add basic installation setup for Windows, Linux and MacOS
-
-Target release date: October 29, 2025
-
-## Future Release
-
-### Documentation Website Release
-**Development Timeline:** December 20, 2025 to December 31, 2025  
-**Tentative Release Date:** January 1, 2026  
-- Write documentation website for SAReq
+### v1.0 Release (first public release)  
+**Target Release Date:** December 25, 2025 (or January 1, 2026)  
+**TODOs:**  
+- Add basic installation setup and release pipeline (CI/CD) for Windows, Linux and MacOS
+- Write documentation website for SAReq @ sareq.dev
+- Any remaining TODOs at codebase level
 
 ### v1.1 Release
 **Development Timeline:** January 1, 2026 to February 28, 2026  
@@ -33,3 +29,4 @@ Target release date: October 29, 2025
   - Ability to run saved requests from the local registry (HTTP Requests Registry)
 - Add request caching
 - Add support for accepting HTTP request bodies in different formats (currently, only `application/json` is supported)
+- ...
