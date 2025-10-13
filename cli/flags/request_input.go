@@ -18,9 +18,9 @@ var reqHeader map[string]string
 
 // RegisterRequestFlags registers HTTP request related flags with the specified request command.
 func RegisterRequestFlags(reqCmd *cobra.Command) {
-	reqCmd.Flags().StringVarP(&reqBody, "body", "B", "", "set the body to send with HTTP request (e.g '{\"key1\": int, \"key2\": \"string\"}')")
-	reqCmd.Flags().StringToStringVarP(&reqHeader, "header", "H", nil, "set a header to send with HTTP request (e.g \"key=value\")")
-	reqCmd.Flags().IntVar(&reqTimeout, "timeout", httpclient.DefaultTimeoutSeconds, "set timeout for HTTP request")
+	reqCmd.Flags().StringVarP(&reqBody, "body", "B", "", "define the (JSON) body to send with HTTP request (e.g. '{\"key1\": 1, \"key2\": \"abc\"}')")
+	reqCmd.Flags().StringToStringVarP(&reqHeader, "header", "H", nil, "add a header to include with HTTP request (e.g \"key=value\")")
+	reqCmd.Flags().IntVar(&reqTimeout, "timeout", httpclient.DefaultTimeoutSeconds, "specify timeout to use with HTTP request")
 
 	commandName := reqCmd.Name()
 	if commandName == "post" || commandName == "put" || commandName == "patch" {

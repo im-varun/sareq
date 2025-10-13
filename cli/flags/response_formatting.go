@@ -11,8 +11,8 @@ var respNoPrettify bool
 // RegisterResponseFormattingFlags registers HTTP response formatting related flags with the
 // specified request command.
 func RegisterResponseFormattingFlags(reqCmd *cobra.Command) {
-	reqCmd.Flags().BoolVar(&respNoColor, "no-color", false, "disable coloring for HTTP response")
-	reqCmd.Flags().BoolVar(&respNoPrettify, "no-prettify", false, "disable prettification for HTTP response")
+	reqCmd.Flags().BoolVar(&respNoColor, "no-color", false, "disable coloring in HTTP response")
+	reqCmd.Flags().BoolVar(&respNoPrettify, "no-prettify", false, "disable prettification in HTTP response")
 }
 
 // ResponseNoColor returns the value stored in the response no-color flag (--no-color).
