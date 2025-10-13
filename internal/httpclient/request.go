@@ -6,9 +6,14 @@ import (
 	"strings"
 )
 
-// newRequest creates and returns a new http.Request instance (from net/http) using the
-// specified request method, URL, body and header.
-func newRequest(reqMethod string, reqURL string, reqBody string, reqHeader map[string]string) (*http.Request, error) {
+// request is a wrapper around the standard http.Request type from net/http.
+type request struct {
+	httpRequest *http.Request // HTTP request from net/http
+}
+
+// newRequest creates and returns a new request instance using the specified
+// request method, URL, body and header.
+func newRequest(reqMethod string, reqURL string, reqBody string, reqHeader map[string]string) (*request, error) {
 	method := strings.ToUpper(reqMethod)
 
 	url := reqURL
@@ -27,5 +32,7 @@ func newRequest(reqMethod string, reqURL string, reqBody string, reqHeader map[s
 		req.Header.Add(key, value)
 	}
 
-	return req, nil
+	return &request{
+		httpRequest: req,
+	}, nil
 }

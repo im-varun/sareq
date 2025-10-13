@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// Response is a wrapper around the http.Response type from net/http.
+// Response is a wrapper around the standard http.Response type from net/http.
 type Response struct {
 	status     string              // HTTP response status (e.g. "200 OK")
 	statusCode int                 // HTTP response status code (e.g. 200)
@@ -14,7 +14,8 @@ type Response struct {
 	body       string              // HTTP response body
 }
 
-// parseResponse reads and parses an http.Response instance into a Response struct.
+// parseResponse reads and parses an http.Response instance into a Response
+// type struct.
 func parseResponse(resp *http.Response) (*Response, error) {
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
