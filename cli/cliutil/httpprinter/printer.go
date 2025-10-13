@@ -6,25 +6,44 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/fatih/color"
+	"github.com/im-varun/sareq/internal/coloring"
 	"github.com/im-varun/sareq/internal/httpclient"
 )
 
-// Print prints the specified HTTP response with/without coloring and JSON prettification
-// formatting.
+// Print prints the specified HTTP response with/without coloring and with/without JSON
+// prettification formatting.
 func Print(resp *httpclient.Response, respNoColor bool, respNoPrettify bool) {
-	respColoring := initResponseColoring()
+	var printProtocol coloring.ColoredPrinterFunc
+	var printStatusSuccess coloring.ColoredPrinterFunc
+	var printStatusNotSuccess coloring.ColoredPrinterFunc
+	var printHeaderKey coloring.ColoredPrinterFunc
+	var printHeaderValue coloring.ColoredPrinterFunc
+	var printBody coloring.SyntaxHighlighterFunc
 
-	if respNoColor {
-		respColoring.disable()
+	if !respNoColor {
+		printProtocol = coloring.NewColoredPrinterFunc(color.FgHiCyan, color.Bold)
+		printStatusSuccess = coloring.NewColoredPrinterFunc(color.FgHiGreen, color.Bold)
+		printStatusNotSuccess = coloring.NewColoredPrinterFunc(color.FgHiRed, color.Bold)
+		printHeaderKey = coloring.NewColoredPrinterFunc(color.FgHiMagenta)
+		printHeaderValue = coloring.NewColoredPrinterFunc(color.FgHiWhite)
+		printBody = coloring.NewSyntaxHighlighterFunc("terminal16m", "dracula", color.FgHiYellow)
+	} else {
+		printProtocol = coloring.NoColoredPrinterFunc()
+		printStatusSuccess = coloring.NoColoredPrinterFunc()
+		printStatusNotSuccess = coloring.NoColoredPrinterFunc()
+		printHeaderKey = coloring.NoColoredPrinterFunc()
+		printHeaderValue = coloring.NoColoredPrinterFunc()
+		printBody = coloring.NoSyntaxHighlighterFunc()
 	}
 
-	respColoring.protocol("%s ", resp.Protocol())
+	printProtocol("%s ", resp.Protocol())
 
 	statusCode := resp.StatusCode()
 	if statusCode >= 200 && statusCode < 300 {
-		respColoring.statusSuccess("%s\n", resp.Status())
+		printStatusSuccess("%s\n", resp.Status())
 	} else {
-		respColoring.statusNotSuccess("%s\n", resp.Status())
+		printStatusNotSuccess("%s\n", resp.Status())
 	}
 
 	fmt.Println()
@@ -39,16 +58,16 @@ func Print(resp *httpclient.Response, respNoColor bool, respNoPrettify bool) {
 	slices.Sort(keys)
 
 	for _, key := range keys {
-		respColoring.headerKey("%s: ", key)
+		printHeaderKey("%s: ", key)
 
 		values := header[key]
 		switch len(values) {
 		case 0:
-			respColoring.headerValue("%s\n", "empty")
+			printHeaderValue("%s\n", "empty")
 		case 1:
-			respColoring.headerValue("%s\n", values[0])
+			printHeaderValue("%s\n", values[0])
 		default:
-			respColoring.headerValue("%v\n", values)
+			printHeaderValue("%v\n", values)
 		}
 	}
 
@@ -67,11 +86,11 @@ func Print(resp *httpclient.Response, respNoColor bool, respNoPrettify bool) {
 	if mediaType == "application/json" && !respNoPrettify {
 		prettyBody, err := prettifyResponseBody(body)
 		if err != nil {
-			respColoring.body(bodyType, "%s\n", body)
+			printBody(bodyType, "%s\n", body)
 		} else {
-			respColoring.body(bodyType, "%s\n", prettyBody)
+			printBody(bodyType, "%s\n", prettyBody)
 		}
 	} else {
-		respColoring.body(bodyType, "%s\n", body)
+		printBody(bodyType, "%s\n", body)
 	}
 }
