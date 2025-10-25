@@ -6,15 +6,6 @@ import (
 )
 
 var (
-	errRequestURLEmpty           = errors.New("is empty")
-	errRequestURLParsingFailed   = errors.New("parsing failed")
-	errRequestURLSchemeMissing   = errors.New("is missing a scheme")
-	errRequestURLSchemeInvalid   = errors.New("contains a scheme that is invalid or not supported by the client")
-	errRequestURLHostMissing     = errors.New("is missing a host")
-	errRequestURLFragmentPresent = errors.New("contains a fragment")
-
-	errRequestBodyJSONEncodingInvalid = errors.New("not a valid JSON encoding")
-
 	errRequestTimeout             = errors.New("request timed out")
 	errRequestDNSResolutionFailed = errors.New("domain name could not be resolved")
 )
