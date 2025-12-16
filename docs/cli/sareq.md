@@ -1,4 +1,6 @@
-## sareq
+---
+title: sareq
+---
 
 SAReq is a CLI-based HTTP client for modern developers
 

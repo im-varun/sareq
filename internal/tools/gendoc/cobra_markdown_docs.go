@@ -60,7 +60,6 @@ func genMarkdownCustom(cmd *cobra.Command, w io.Writer, linkHandler func(string)
 	buf := new(bytes.Buffer)
 	name := cmd.CommandPath()
 
-	buf.WriteString("## " + name + "\n\n")
 	buf.WriteString(cmd.Short + "\n\n")
 	if len(cmd.Long) > 0 {
 		buf.WriteString("### Synopsis\n\n")
@@ -71,13 +70,13 @@ func genMarkdownCustom(cmd *cobra.Command, w io.Writer, linkHandler func(string)
 		fmt.Fprintf(buf, "```bash\n%s\n```\n\n", cmd.UseLine())
 	}
 
+	if err := printOptions(buf, cmd, name); err != nil {
+		return err
+	}
+
 	if len(cmd.Example) > 0 {
 		buf.WriteString("### Examples\n\n")
 		fmt.Fprintf(buf, "```bash\n%s\n```\n\n", cmd.Example)
-	}
-
-	if err := printOptions(buf, cmd, name); err != nil {
-		return err
 	}
 
 	if hasSeeAlso(cmd) {
@@ -123,13 +122,6 @@ func genMarkdownCustom(cmd *cobra.Command, w io.Writer, linkHandler func(string)
 	_, err := buf.WriteTo(w)
 
 	return err
-}
-
-func genMarkdownTree(cmd *cobra.Command, dir string) error {
-	identity := func(s string) string { return s }
-	emptyStr := func(s string) string { return "" }
-
-	return genMarkdownTreeCustom(cmd, dir, emptyStr, identity)
 }
 
 func genMarkdownTreeCustom(cmd *cobra.Command, dir string, filePrepender, linkHandler func(string) string) error {

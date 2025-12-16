@@ -1,19 +1,11 @@
-## sareq patch
+---
+title: sareq patch
+---
 
 Send HTTP PATCH request to the specified URL
 
 ```bash
 sareq patch URL --body BODY [flags]
-```
-
-### Examples
-
-```bash
-# basic PATCH request
-sareq patch https://api.example.com/users/user123 --body '{"email": "john@example.com"}'
-
-# PATCH request with header
-sareq patch https://api.example.com/users/user123 --header "Authorization=abc123" --body '{"email": "john@example.com"}'
 ```
 
 ### Options
@@ -25,6 +17,16 @@ sareq patch https://api.example.com/users/user123 --header "Authorization=abc123
       --no-color                disable coloring in HTTP response
       --no-prettify             disable prettification in HTTP response
   -h, --help                    help for patch
+```
+
+### Examples
+
+```bash
+# basic PATCH request
+sareq patch https://api.example.com/users/user123 --body '{"email": "john@example.com"}'
+
+# PATCH request with header
+sareq patch https://api.example.com/users/user123 --header "Authorization=abc123" --body '{"email": "john@example.com"}'
 ```
 
 ### SEE ALSO

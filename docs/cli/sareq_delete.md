@@ -1,19 +1,11 @@
-## sareq delete
+---
+title: sareq delete
+---
 
 Send HTTP DELETE request to the specified URL
 
 ```bash
 sareq delete URL [flags]
-```
-
-### Examples
-
-```bash
-# basic DELETE request
-sareq delete https://api.example.com/users/user123
-
-# DELETE request with header
-sareq delete https://api.example.com/users/user123 --header "Authorization=abc123"
 ```
 
 ### Options
@@ -25,6 +17,16 @@ sareq delete https://api.example.com/users/user123 --header "Authorization=abc12
       --no-color                disable coloring in HTTP response
       --no-prettify             disable prettification in HTTP response
   -h, --help                    help for delete
+```
+
+### Examples
+
+```bash
+# basic DELETE request
+sareq delete https://api.example.com/users/user123
+
+# DELETE request with header
+sareq delete https://api.example.com/users/user123 --header "Authorization=abc123"
 ```
 
 ### SEE ALSO
