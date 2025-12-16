@@ -45,7 +45,6 @@ func Print(resp *httpclient.Response, respNoColor bool, respNoPrettify bool) {
 	} else {
 		printStatusNotSuccess("%s\n", resp.Status())
 	}
-
 	fmt.Println()
 
 	header := resp.Header()
@@ -54,7 +53,6 @@ func Print(resp *httpclient.Response, respNoColor bool, respNoPrettify bool) {
 	for key := range header {
 		keys = append(keys, key)
 	}
-
 	slices.Sort(keys)
 
 	for _, key := range keys {
@@ -70,10 +68,7 @@ func Print(resp *httpclient.Response, respNoColor bool, respNoPrettify bool) {
 			printHeaderValue("%v\n", values)
 		}
 	}
-
 	fmt.Println()
-
-	body := strings.Trim(resp.Body(), "\r\n")
 
 	contentType := header["Content-Type"]
 	mediaType, _, err := mime.ParseMediaType(contentType[0])
@@ -82,6 +77,7 @@ func Print(resp *httpclient.Response, respNoColor bool, respNoPrettify bool) {
 	}
 
 	if isTextualMediaType(mediaType) {
+		body := strings.Trim(resp.Body(), "\r\n")
 		bodyType := strings.Split(mediaType, "/")[1]
 
 		if mediaType == "application/json" && !respNoPrettify {

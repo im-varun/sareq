@@ -30,7 +30,6 @@ func init() {
 	flags.RegisterRequestFlags(getCmd)
 	flags.RegisterResponseFormattingFlags(getCmd)
 	flags.DisableSorting(getCmd)
-
 	rootCmd.AddCommand(getCmd)
 }
 

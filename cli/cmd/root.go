@@ -31,6 +31,5 @@ func Execute() {
 
 func init() {
 	cobra.EnableCommandSorting = false
-
 	rootCmd.AddGroup(&cobra.Group{ID: "http request", Title: "HTTP Request Commands"})
 }
