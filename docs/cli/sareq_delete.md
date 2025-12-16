@@ -31,5 +31,5 @@ sareq delete https://api.example.com/users/user123 --header "Authorization=abc12
 
 ### SEE ALSO
 
-* [sareq](sareq.md)	 - SAReq is a CLI-based HTTP client for modern developers
+* [sareq](sareq.md)	 - A CLI-based HTTP client for modern developers
 

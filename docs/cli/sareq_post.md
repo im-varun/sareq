@@ -34,5 +34,5 @@ sareq post https://api.example.com/users --header "Authorization=abc123" --heade
 
 ### SEE ALSO
 
-* [sareq](sareq.md)	 - SAReq is a CLI-based HTTP client for modern developers
+* [sareq](sareq.md)	 - A CLI-based HTTP client for modern developers
 
