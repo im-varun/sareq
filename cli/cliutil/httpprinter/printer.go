@@ -81,16 +81,20 @@ func Print(resp *httpclient.Response, respNoColor bool, respNoPrettify bool) {
 		mediaType = "text/plain"
 	}
 
-	bodyType := strings.Split(mediaType, "/")[1]
+	if isTextualMediaType(mediaType) {
+		bodyType := strings.Split(mediaType, "/")[1]
 
-	if mediaType == "application/json" && !respNoPrettify {
-		prettyBody, err := prettifyResponseBody(body)
-		if err != nil {
-			printBody(bodyType, "%s\n", body)
+		if mediaType == "application/json" && !respNoPrettify {
+			prettyBody, err := prettifyResponseBody(body)
+			if err != nil {
+				printBody(bodyType, "%s\n", body)
+			} else {
+				printBody(bodyType, "%s\n", prettyBody)
+			}
 		} else {
-			printBody(bodyType, "%s\n", prettyBody)
+			printBody(bodyType, "%s\n", body)
 		}
 	} else {
-		printBody(bodyType, "%s\n", body)
+		fmt.Println("[binary data cannot be displayed]")
 	}
 }
