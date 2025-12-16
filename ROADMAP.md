@@ -28,5 +28,4 @@ This document outlines the tentative development roadmap for SAReq.
   - Support saving HTTP requests to a local registry (HTTP Requests Registry)
   - Ability to run saved requests from the local registry (HTTP Requests Registry)
 - Add request caching
-- Add support for accepting HTTP request bodies in different formats (currently, only `application/json` is supported)
 - ...
