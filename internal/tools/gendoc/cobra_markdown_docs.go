@@ -80,7 +80,7 @@ func genMarkdownCustom(cmd *cobra.Command, w io.Writer, linkHandler func(string)
 	}
 
 	if hasSeeAlso(cmd) {
-		buf.WriteString("### SEE ALSO\n\n")
+		buf.WriteString("### See Also\n\n")
 
 		if cmd.HasParent() {
 			parent := cmd.Parent()

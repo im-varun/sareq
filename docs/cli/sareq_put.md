@@ -29,7 +29,7 @@ sareq put https://api.example.com/users/user123 --body '{"name": "John Doe"}'
 sareq put https://api.example.com/users/user123 --header "Authorization=abc123" --body '{"name": "John Doe"}'
 ```
 
-### SEE ALSO
+### See Also
 
 * [sareq](sareq.md)	 - A CLI-based HTTP client for modern developers
 

@@ -32,7 +32,7 @@ sareq get https://api.example.com/users/user123 --timeout 5
 sareq get https://api.example.com/users/user123 --header "Authorization=abc123"
 ```
 
-### SEE ALSO
+### See Also
 
 * [sareq](sareq.md)	 - A CLI-based HTTP client for modern developers
 

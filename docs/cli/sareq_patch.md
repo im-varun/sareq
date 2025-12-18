@@ -29,7 +29,7 @@ sareq patch https://api.example.com/users/user123 --body '{"email": "john@exampl
 sareq patch https://api.example.com/users/user123 --header "Authorization=abc123" --body '{"email": "john@example.com"}'
 ```
 
-### SEE ALSO
+### See Also
 
 * [sareq](sareq.md)	 - A CLI-based HTTP client for modern developers
 

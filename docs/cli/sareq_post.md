@@ -32,7 +32,7 @@ sareq post https://api.example.com/users --body '{"name": "John Doe"}' --timeout
 sareq post https://api.example.com/users --header "Authorization=abc123" --header "Content-Type=application/json" --body '{"name": "John Doe"}'
 ```
 
-### SEE ALSO
+### See Also
 
 * [sareq](sareq.md)	 - A CLI-based HTTP client for modern developers
 
