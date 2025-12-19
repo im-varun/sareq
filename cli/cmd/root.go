@@ -10,7 +10,7 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:           "sareq",
-	Short:         "A CLI-based HTTP client for modern developers",
+	Short:         "A modern, open-source HTTP client for the command line",
 	Version:       release.Version(),
 	SilenceErrors: true,
 	SilenceUsage:  true,
