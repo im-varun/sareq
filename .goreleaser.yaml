@@ -19,7 +19,7 @@ builds:
       - arm64
     ldflags:
       - -s -w
-      - -X github.com/im-varun/sareq/internal/release.versionString={{.Version}}
+      - -X github.com/im-varun/sareq/internal/release.versionString={{.Tag}}
 
   - id: darwin
     main: ./main.go
@@ -33,7 +33,7 @@ builds:
       - arm64
     ldflags:
       - -s -w
-      - -X github.com/im-varun/sareq/internal/release.versionString={{.Version}}
+      - -X github.com/im-varun/sareq/internal/release.versionString={{.Tag}}
 
   - id: windows
     main: ./main.go
@@ -46,26 +46,42 @@ builds:
       - amd64
     ldflags:
       - -s -w
-      - -X github.com/im-varun/sareq/internal/release.versionString={{.Version}}
+      - -X github.com/im-varun/sareq/internal/release.versionString={{.Tag}}
 
 archives:
   - id: linux
     ids: [linux]
-    formats: ['tar.gz']
-    name_template: "{{.ProjectName}}-{{.Version}}-{{.Os}}-{{.Arch}}"
+    formats: ["tar.gz"]
+    name_template: "{{.ProjectName}}-{{.Tag}}-{{.Os}}-{{.Arch}}"
+    files:
+      - LICENSE
+      - README.md
+      # - CHANGELOG.md
+      - docs/*
 
   - id: darwin
     ids: [darwin]
-    formats: ['tar.gz']
-    name_template: "{{.ProjectName}}-{{.Version}}-{{.Os}}-{{.Arch}}"
+    formats: ["tar.gz"]
+    name_template: "{{.ProjectName}}-{{.Tag}}-{{.Os}}-{{.Arch}}"
+    files:
+      - LICENSE
+      - README.md
+      # - CHANGELOG.md
+      - docs/*
 
   - id: windows
     ids: [windows]
-    formats: ['zip']
-    name_template: "{{.ProjectName}}-{{.Version}}-{{.Os}}-{{.Arch}}"
+    formats: ["zip"]
+    name_template: "{{.ProjectName}}-{{.Tag}}-{{.Os}}-{{.Arch}}"
+    files:
+      - LICENSE
+      - README.md
+      # - CHANGELOG.md
+      - docs/*
 
 checksum:
-  name_template: "checksums.txt"
+  name_template: "{{.ProjectName}}-{{.Tag}}-{{.Os}}-{{.Arch}}.{{.Algorithm}}"
+  split: true
 
 changelog:
   sort: asc
