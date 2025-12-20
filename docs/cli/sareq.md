@@ -2,7 +2,7 @@
 title: sareq
 ---
 
-A CLI-based HTTP client for modern developers
+A modern, open-source HTTP client for the command line
 
 ### Options
 

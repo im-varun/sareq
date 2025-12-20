@@ -14,7 +14,15 @@ sareq version [flags]
   -h, --help   help for version
 ```
 
+### Examples
+
+```bash
+# print the version of sareq
+sareq version
+# output: sareq version vX.Y.Z
+```
+
 ### See Also
 
-* [sareq](sareq.md)	 - A CLI-based HTTP client for modern developers
+* [sareq](sareq.md)	 - A modern, open-source HTTP client for the command line
 

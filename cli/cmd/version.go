@@ -8,13 +8,18 @@ import (
 )
 
 var versionCmd = &cobra.Command{
-	Use:   "version",
-	Short: "Print the version of SAReq",
+	Use:     "version",
+	Short:   "Print the version of SAReq",
+	Example: versionCmdExample,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(release.Version())
+		fmt.Println("sareq version", release.Version())
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(versionCmd)
 }
+
+const versionCmdExample string = `# print the version of sareq
+sareq version
+# output: sareq version vX.Y.Z`

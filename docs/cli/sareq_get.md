@@ -34,5 +34,5 @@ sareq get https://api.example.com/users/user123 --header "Authorization=abc123"
 
 ### See Also
 
-* [sareq](sareq.md)	 - A CLI-based HTTP client for modern developers
+* [sareq](sareq.md)	 - A modern, open-source HTTP client for the command line
 
