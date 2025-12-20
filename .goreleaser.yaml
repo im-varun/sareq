@@ -1,0 +1,76 @@
+version: 2
+
+project_name: sareq
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: linux
+    main: ./main.go
+    binary: sareq
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w
+      - -X github.com/im-varun/sareq/internal/release.versionString={{.Version}}
+
+  - id: darwin
+    main: ./main.go
+    binary: sareq
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w
+      - -X github.com/im-varun/sareq/internal/release.versionString={{.Version}}
+
+  - id: windows
+    main: ./main.go
+    binary: sareq
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - windows
+    goarch:
+      - amd64
+    ldflags:
+      - -s -w
+      - -X github.com/im-varun/sareq/internal/release.versionString={{.Version}}
+
+archives:
+  - id: linux
+    ids: [linux]
+    formats: ['tar.gz']
+    name_template: "{{.ProjectName}}-{{.Version}}-{{.Os}}-{{.Arch}}"
+
+  - id: darwin
+    ids: [darwin]
+    formats: ['tar.gz']
+    name_template: "{{.ProjectName}}-{{.Version}}-{{.Os}}-{{.Arch}}"
+
+  - id: windows
+    ids: [windows]
+    formats: ['zip']
+    name_template: "{{.ProjectName}}-{{.Version}}-{{.Os}}-{{.Arch}}"
+
+checksum:
+  name_template: "checksums.txt"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
