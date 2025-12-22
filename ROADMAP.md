@@ -1,31 +1,27 @@
-# Development Roadmap
+# Roadmap
 
-This document outlines the tentative development roadmap for SAReq.
+This document outlines the future roadmap for SAReq, detailing planned features and improvements to enhance user experience and functionality. Some of these features are already planned for upcoming releases, while others are long-term goals that will be developed based on user feedback and evolving requirements.
 
-## Releases
+## v1.1.0
 
-### v1.0 Release (first public release)  
-**Target Release Date:** December 25, 2025 (or January 1, 2026)  
-**TODOs:**  
-- Add basic installation setup and release pipeline (CI/CD) for Windows, Linux and MacOS
-- Write documentation website for SAReq @ sareq.dev
-- Any remaining TODOs at codebase level
+**Development timeline:** January 1, 2026 - March 31, 2026  
+**Tentative release data:** April 1, 2026
 
-### v1.1 Release
-**Development Timeline:** January 1, 2026 to February 28, 2026  
-**Tentative Release Date:** March 1, 2026  
-- Add support for input from files
-- Add support for output to files
+- Support for input from files (mainly for request bodies)
+- Support for output to files (mainly for response bodies)
+- Enhanced error handling and user-friendly error messages
+- Support for creating environment variables and using them in requests
 
-### v1.2 Release
-**Development Timeline:** March 1, 2026 to March 31, 2026  
-**Tentative Release Date:** April 1, 2026  
-- Add support for creating environment variables and using them in an HTTP request
+## v1.2.0
 
-## Future Plans (TBD)
+**Development timeline:** April 1, 2026 - August 31, 2026  
+**Tentative release data:** September 1, 2026
 
-- Add HTTP Requests Registry
-  - Support saving HTTP requests to a local registry (HTTP Requests Registry)
-  - Ability to run saved requests from the local registry (HTTP Requests Registry)
-- Add request caching
-- ...
+- HTTP Requests Registry (a centralized place to manage and reuse HTTP requests)
+    - Save frequently used requests to the registry
+    - Import/export requests from/to files
+    - Ability to run requests from the registry
+
+## Future Plans & Ideas (post v1.2.0 release)
+
+... list of ideas and plans for future versions beyond v1.2.0 ...
