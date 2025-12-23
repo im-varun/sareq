@@ -20,12 +20,12 @@ SAReq can be installed via the command line or by downloading the official binar
 ### Using `go install`
 
 To install SAReq using this method, ensure you have a latest version of [Go](https://go.dev/) installed on your system. Then, run the following command in your terminal:
-```bash
+```sh
 go install github.com/im-varun/sareq@latest
 ```
 
 To verify the installation, you can run:
-```bash
+```sh
 sareq --version
 # or sareq version
 ```
@@ -43,7 +43,8 @@ Follow these steps to ensure a successful installation:
 4. Once the checksum is verified, extract the contents of the downloaded archive to a directory of your choice.
 5. Add the directory containing the extracted `sareq` executable to your system's PATH environment variable. This allows you to run SAReq from any terminal window.
 6. To verify the installation, open a new terminal window and run:
-    ```bash
+    
+    ```sh
     sareq --version
     # or sareq version
     ```
@@ -64,7 +65,7 @@ SAReq, short for "Send A Request", is a CLI-based HTTP client that allows you to
 ### Understanding the Basics
 
 SAReq is built around the concept of commands and flags (also known as options) that you can use to perform various actions. The basic syntax for using SAReq is as follows:
-```bash
+```sh
 sareq [command] [flags]
 ```
 The command may also require additional arguments, such as a URL.
@@ -92,11 +93,11 @@ Each HTTP request command in SAReq requires at least a URL as an argument. Addit
 #### A simple GET request
 
 Let's start by making a simple GET request to fetch data from a hypothetical API endpoint.
-```bash
+```sh
 sareq get https://api.example.com/users
 ```
 In this example, we are using the `get` command to retrieve a list of users from the specified URL. SAReq will send the request and display the response in your terminal like this:
-```bash
+```sh
 HTTP/1.1 200 OK
 
 Content-Type: application/json; charset=utf-8
@@ -118,7 +119,7 @@ Content-Type: application/json; charset=utf-8
 #### A simple POST request
 
 Now, let's make a simple POST request to create a new user.
-```bash
+```sh
 sareq post https://api.example.com/users --body '{"name": "Jane Doe", "email": "jane@doe.com"}'
 ```
 In this example, we used the `post` command to send a request to create a new user with the specified name and email. The `--body` flag was used to define the request body containing the user data in JSON format.
@@ -141,7 +142,7 @@ There are some other flags available as a convenience for users. These include:
 #### Adding Headers
 
 Headers can be added using the `-H` or `--header` flag followed by the header key-value pair in the format `"key=value"`.
-```bash
+```sh
 sareq get https://api.example.com/users --header "Authorization=abc123"
 
 # or using the shorthand version
@@ -149,14 +150,14 @@ sareq get https://api.example.com/users -H "Authorization=abc123"
 ```
 
 You can also add multiple headers by using the flag multiple times (once for each header):
-```bash
+```sh
 sareq get https://api.example.com/users -H "Authorization=abc123" -H "Accept=application/json"
 ```
 
 #### Defining a Request Body
 
 Request bodies can be defined using the `-B` or `--body` flag followed by the body content. This is mainly used with POST, PUT, or PATCH requests.
-```bash
+```sh
 sareq post https://api.example.com/users --body '{"name": "John Doe"}'
 
 # or using the shorthand version
@@ -168,7 +169,7 @@ The content of the body is enclosed in single quotes or double quotes, depending
 #### Specifying a Timeout
 
 To avoid waiting indefinitely for a response, you can specify a timeout with the request using the `--timeout` flag followed by the number of seconds to wait before timing out.
-```bash
+```sh
 sareq get https://api.example.com/users --timeout 10
 ```
 This will set a timeout of 10 seconds for the request. If the server does not respond within this time frame, SAReq will terminate the request and display a timeout error.
@@ -176,7 +177,7 @@ This will set a timeout of 10 seconds for the request. If the server does not re
 #### Making a Request with Multiple Flags
 
 SAReq allows you to combine multiple flags in a single request. You simply specify each flag followed by its corresponding value (if applicable) in the command.
-```bash
+```sh
 sareq post https://api.example.com/users -H "Authorization=abc123" -H "Content-Type=application/json" -B '{"name": "John Doe"}' --timeout 15
 ```
 This command makes a POST request to create a new user, includes two headers, defines a JSON body, and sets a timeout of 15 seconds.
@@ -188,7 +189,7 @@ Currently, SAReq offers two features to format the output of HTTP responses:
 - **Prettification**: This feature formats the response body (if it's in JSON format) to make it more human-readable by adding indentation and line breaks.
 
 By default, both coloring and prettification are enabled. However, you can disable them using the `--no-color` and `--no-prettify` flags, respectively.
-```bash
+```sh
 # to disable only coloring
 sareq get https://api.example.com/users --no-color
 
@@ -204,7 +205,7 @@ sareq get https://api.example.com/users --no-color --no-prettify
 SAReq provides built-in help and version information through the `-h/--help` and `-v/--version` flags.
 
 To display help information for SAReq or a specific command, use the `-h` or `--help` flag:
-```bash
+```sh
 sareq --help
 
 # help for a specific command
@@ -212,19 +213,19 @@ sareq get --help
 ```
 
 To display the current version of SAReq, use the `-v` or `--version` flag:
-```bash
+```sh
 sareq --version
 ```
 
 You can also use the `version` subcommand to get the version information:
-```bash
+```sh
 sareq version
 ```
 
 ### Testing with `localhost`
 
 SAReq is not limited to making requests to public APIs. You can also use it to test your local development servers running on `localhost`. For example, if you have a server running on `http://localhost:8080`, you can make requests to it like this:
-```bash
+```sh
 # making a GET request to localhost
 sareq get http://localhost:8080/api/test
 
