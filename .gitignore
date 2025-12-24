@@ -1,3 +1,30 @@
-main.exe
+# personal TODOs
 TODO
+
+# sareq binary (for testing purposes)
+main.exe
+
+# goreleaser build artifacts
 dist/
+
+# website dependencies
+website/node_modules
+
+# website production
+website/build
+
+# website generated files
+website/.docusaurus
+website/.cache-loader
+
+# website miscellaneous
+website/.DS_Store
+website/.env.local
+website/.env.development.local
+website/.env.test.local
+website/.env.production.local
+
+# website log files
+website/npm-debug.log*
+website/yarn-debug.log*
+website/yarn-error.log*

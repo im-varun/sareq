@@ -1,0 +1,55 @@
+---
+title: Installation
+description: Learn to install SAReq
+sidebar_position: 1
+---
+
+import InstallChecksumVerification from "@site/src/components/InstallChecksumVerification";
+
+Currently, SAReq can be installed using one of the following two methods:
+
+1. Using `go install`
+2. Downloading pre-built binaries
+
+## Using `go install`
+
+To install SAReq using this method, ensure you have a latest version of [Go](https://go.dev/) installed on your system. Then, run the following command in your terminal:
+```sh
+go install github.com/im-varun/sareq@latest
+```
+
+To verify the installation, you can run:
+```sh
+sareq --version
+# or sareq version
+```
+This should display the installed version of SAReq.
+
+## Downloading Pre-built Binaries
+
+Pre-built binaries for SAReq are available for various operating systems (Windows, Linux, macOS) and architectures (amd64, arm64), and can be downloaded directly from SAReq's [GitHub Releases](https://github.com/im-varun/sareq/releases) page.
+
+Follow these steps to ensure a successful installation:
+
+1. Navigate to the [GitHub Releases](https://github.com/im-varun/sareq/releases) page of SAReq.
+
+2. Download the appropriate archive file for your operating system and architecture along with its corresponding `.sha256` checksum file.
+
+3. Verify the integrity of the downloaded archive using the SHA256 checksum provided in the `.sha256` file. To do this, make sure the archive file and the `.sha256` file are in the same directory, then run the following command based on your operating system:
+    <InstallChecksumVerification />
+    Compare the output hash with the contents of the `.sha256` file to ensure they match. If they do not match, please do not proceed with the installation steps below, and instead, re-download the files.
+
+4. Once the checksum is verified, extract the contents of the downloaded archive to a directory of your choice.
+
+5. Add the directory containing the extracted `sareq` executable to your system's PATH environment variable. This allows you to run SAReq from any terminal window.
+
+6. To verify the installation, open a new terminal window and run:
+    ```sh
+    sareq --version
+    # or sareq version
+    ```
+    This should display the installed version of SAReq indicating that the installation was successful.
+
+## Other Installation Methods
+
+Support for additional installation methods, such as package managers like Scoop and Homebrew, is currently under development. Stay tuned for updates in future releases!

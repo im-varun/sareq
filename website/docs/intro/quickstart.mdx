@@ -1,0 +1,192 @@
+---
+title: Quickstart
+description: Quick starter's guide to using SAReq
+sidebar_position: 2
+---
+
+This quickstart guide covers how to quickly get started using SAReq.
+
+## Introduction
+
+SAReq, short for "Send A Request", is a CLI-based HTTP client that allows you to make HTTP requests directly from your terminal. It is designed to be simple, fast, and easy to use. It provides a straightforward way to interact with APIs without the need for a graphical interface.
+
+Before we begin, ensure you have SAReq already installed on your system. If you haven't installed it yet, please refer to the [Installation Guide](./install.mdx) for instructions.
+
+## Understanding the Basics
+
+SAReq is built around the concept of commands and flags (also known as options) that you can use to perform various actions. The basic syntax for using SAReq is as follows:
+```sh
+sareq [command] [flags]
+```
+The command may also require additional arguments, such as a URL.
+
+## Making Your First Request
+
+### Request Semantics
+
+SAReq supports several HTTP methods (also known as verbs) that you can use to make requests. The most commonly used methods are:
+- `GET`: Retrieve data from a specified resource.
+- `POST`: Send data to a server to create a new resource.
+- `PUT`: Update an existing resource with new data.
+- `PATCH`: Partially update an existing resource.
+- `DELETE`: Remove a specified resource.
+
+Each of these methods corresponds to a command of the same name in SAReq. For example, to make a GET request, you would use the `get` command, and to make a POST request, you would use the `post` command.
+
+A request typically consists of the following components:
+- **URL**: The endpoint to which the request is sent.
+- **Headers**: Additional information sent with the request (e.g., authentication tokens, content type).
+- **Body**: The data sent with the request (mainly used with POST, PUT, PATCH requests).
+
+Each HTTP request command in SAReq requires at least a URL as an argument. Additional components such as headers and body can be specified using the `-H/--header` and `-B/--body` flags, respectively. For more details on these flags, please refer to the [Adding Headers](#adding-headers) and [Defining a Request Body](#defining-a-request-body) sections below.
+
+### A simple GET request
+
+Let's start by making a simple GET request to fetch data from a hypothetical API endpoint.
+```sh
+sareq get https://api.example.com/users
+```
+In this example, we are using the `get` command to retrieve a list of users from the specified URL. SAReq will send the request and display the response in your terminal like this:
+```
+HTTP/1.1 200 OK
+
+Content-Type: application/json; charset=utf-8
+
+[
+    {
+        "id": 1,
+        "name": "John Doe",
+        "email": "john@doe.com"
+    },
+    {
+        "id": 2,
+        "name": "Jane Smith",
+        "email": "jane@smith.com"
+    }
+]
+```
+
+### A simple POST request
+
+Now, let's make a simple POST request to create a new user.
+```sh
+sareq post https://api.example.com/users --body '{"name": "Jane Doe", "email": "jane@doe.com"}'
+```
+In this example, we used the `post` command to send a request to create a new user with the specified name and email. The `--body` flag was used to define the request body containing the user data in JSON format.
+
+## Using flags
+
+SAReq provides several flags that you can use to customize the behavior of the commands. Flags are generally used to customize requests and responses, such as adding headers, specifying request bodies, or changing output formats.
+
+Here are some commonly used flags:
+- `-H, --header <header>`: Add a header to include with the request.
+- `-B, --body <body>`: Define the body to send with the request (mainly used with POST, PUT, PATCH requests).
+- `--timeout <seconds>`: Specify a timeout to use with the request.
+
+There are some other flags available as a convenience for users. These include:
+- `-h, --help`: Display help information for the command (or a subcommand) with which it is used.
+- `-v, --version`: Display the current version of SAReq.
+- `--no-color`: Disable coloring in the HTTP response output.
+- `--no-prettify`: Disable prettification in the HTTP response output.
+
+### Adding Headers
+
+Headers can be added using the `-H` or `--header` flag followed by the header key-value pair in the format `"key=value"`.
+```sh
+sareq get https://api.example.com/users --header "Authorization=abc123"
+
+# or using the shorthand version
+sareq get https://api.example.com/users -H "Authorization=abc123"
+```
+
+You can also add multiple headers by using the flag multiple times (once for each header):
+```sh
+sareq get https://api.example.com/users -H "Authorization=abc123" -H "Accept=application/json"
+```
+
+### Defining a Request Body
+
+Request bodies can be defined using the `-B` or `--body` flag followed by the body content. This is mainly used with POST, PUT, or PATCH requests.
+```sh
+sareq post https://api.example.com/users --body '{"name": "John Doe"}'
+
+# or using the shorthand version
+sareq post https://api.example.com/users -B '{"name": "John Doe"}'
+```
+
+The content of the body is enclosed in single quotes or double quotes, depending on type of the content. For example, JSON content is typically enclosed in single quotes to avoid conflicts with double quotes used for JSON keys and values.
+
+### Specifying a Timeout
+
+To avoid waiting indefinitely for a response, you can specify a timeout with the request using the `--timeout` flag followed by the number of seconds to wait before timing out.
+```sh
+sareq get https://api.example.com/users --timeout 10
+```
+This will set a timeout of 10 seconds for the request. If the server does not respond within this time frame, SAReq will terminate the request and display a timeout error.
+
+### Making a Request with Multiple Flags
+
+SAReq allows you to combine multiple flags in a single request. You simply specify each flag followed by its corresponding value (if applicable) in the command.
+```sh
+sareq post https://api.example.com/users -H "Authorization=abc123" -H "Content-Type=application/json" -B '{"name": "John Doe"}' --timeout 15
+```
+This command makes a POST request to create a new user, includes two headers, defines a JSON body, and sets a timeout of 15 seconds.
+
+### Formatting the Output
+
+Currently, SAReq offers two features to format the output of HTTP responses:
+- **Coloring**: This feature adds color to different parts of the HTTP response (e.g., status code, headers, body) to enhance readability.
+- **Prettification**: This feature formats the response body (if it's in JSON format) to make it more human-readable by adding indentation and line breaks.
+
+By default, both coloring and prettification are enabled. However, you can disable them using the `--no-color` and `--no-prettify` flags, respectively.
+```sh
+# to disable only coloring
+sareq get https://api.example.com/users --no-color
+
+# to disable only prettification
+sareq get https://api.example.com/users --no-prettify
+
+# to disable coloring and prettification together
+sareq get https://api.example.com/users --no-color --no-prettify
+```
+
+### Help and Version Information
+
+SAReq provides built-in help and version information through the `-h/--help` and `-v/--version` flags.
+
+To display help information for SAReq or a specific command, use the `-h` or `--help` flag:
+```sh
+sareq --help
+
+# help for a specific command
+sareq get --help
+```
+
+To display the current version of SAReq, use the `-v` or `--version` flag:
+```sh
+sareq --version
+```
+
+You can also use the `version` subcommand to get the version information:
+```sh
+sareq version
+```
+
+## Testing with `localhost`
+
+SAReq is not limited to making requests to public APIs. You can also use it to test your local development servers running on `localhost`. For example, if you have a server running on `http://localhost:8080`, you can make requests to it like this:
+```sh
+# making a GET request to localhost at port 8080
+sareq get http://localhost:8080/api/test
+
+# making a POST request to localhost at port 8080
+sareq post http://localhost:8080/api/test --body '{"data": "test"}'
+
+# making a DELETE request to localhost at port 8080
+sareq delete http://localhost:8080/api/test/1
+```
+
+## Next Steps
+
+Congratulations! You have successfully learned the basics of using SAReq to make HTTP requests from the command line. For detailed information on all available commands, along with their usage and options, please refer to the [SAReq CLI Reference](../cli/index.mdx
+) page.

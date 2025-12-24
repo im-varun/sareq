@@ -1,0 +1,10 @@
+.featuresSection {
+  display: flex;
+  align-items: center;
+  padding: 1.2rem 0;
+  width: 100%;
+}
+
+.featuresHeading {
+  text-align: center;
+}

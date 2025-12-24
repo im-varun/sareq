@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+:root {
+  --ifm-color-primary: #5b6f82;
+  --ifm-color-primary-dark: #425f78;
+  --ifm-color-primary-light: #5f7f9c;
+
+  --ifm-background-color: #fcfcfb;
+  --ifm-background-surface-color: #f6f7f6;
+
+  --ifm-font-family-base: 'IBM Plex Sans', system-ui, sans-serif;
+  --ifm-font-family-monospace: 'IBM Plex Mono', monospace;
+
+  --ifm-font-color-base: #1f2937;
+  --ifm-font-color-secondary: #4b5563;
+
+  --ifm-navbar-background-color: var(--ifm-background-color);
+  --ifm-footer-background-color: var(--ifm-background-color);
+
+  --ifm-code-background: #f3f4f6;
+  --ifm-code-color: #111827;
+
+  --ifm-color-emphasis-200: #e6e7e9;
+  --ifm-color-emphasis-300: #d1d5db;
+}
+
+[data-theme='dark'] {
+  --ifm-background-color: #1b1b1f;
+  --ifm-background-surface-color: #202024;
+
+  --ifm-font-color-base: #e4e4e7;
+  --ifm-font-color-secondary: #a1a1aa;
+
+  --ifm-navbar-background-color: var(--ifm-background-color);
+  --ifm-footer-background-color: var(--ifm-background-color);
+
+  --ifm-color-primary: #9aa9b7;
+  --ifm-color-primary-dark: #748da3;
+  --ifm-color-primary-light: #9fb4c6;
+
+  --ifm-code-background: #1f1f23;
+  --ifm-code-color: #e4e4e7;
+
+  --ifm-color-emphasis-200: #2b2b31;
+  --ifm-color-emphasis-300: #3f3f46;
+}
+
+body {
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+code,
+pre {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.95rem;
+}
+
+pre {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 6px;
+}
+
+:not(pre) > code {
+  background-color: var(--ifm-code-background);
+  color: var(--ifm-code-color);
+  padding: 0.15em 0.35em;
+  border-radius: 4px;
+}
+
+table {
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.navbar {
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.footer {
+  background-color: #e3ebf4;
+  color: #374151;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .footer {
+  background-color: #1d242b;
+  color: #c0c0c8;
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+}

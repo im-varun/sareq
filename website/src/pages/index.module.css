@@ -1,0 +1,28 @@
+.heroBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero.hero--primary {
+  background-color: #e3ebf4;
+  color: #1f2937;
+}
+
+[data-theme='dark'] .hero.hero--primary {
+  background-color: #1d242b;
+  color: #e4e4e7;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
