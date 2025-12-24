@@ -17,6 +17,13 @@ func main() {
 		os.Exit(1)
 	}
 
+	websiteCliDocsDir := "./website/docs/cli"
+	err = os.MkdirAll(websiteCliDocsDir, 0o755)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "could not create directory for website cli docs: %v", err)
+		os.Exit(1)
+	}
+
 	root := cmd.Root()
 	root.DisableAutoGenTag = true
 
@@ -29,11 +36,18 @@ func main() {
 	link := func(name string) string {
 		return strings.ToLower(name)
 	}
+
 	err = genMarkdownTreeCustom(root, cliDocsDir, prep, link)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "could not generate cli docs: %v", err)
 		os.Exit(1)
 	}
 
-	fmt.Println("successfully generated cli docs")
+	err = genMarkdownTreeCustom(root, websiteCliDocsDir, prep, link)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "could not generate website cli docs: %v", err)
+		os.Exit(1)
+	}
+
+	fmt.Println("successfully generated cli and website cli docs")
 }
