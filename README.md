@@ -42,10 +42,29 @@ Pre-built binaries for SAReq are available for various operating systems (Window
 Follow these steps to ensure a successful installation:
 
 1. Navigate to the [GitHub Releases](https://github.com/im-varun/sareq/releases) page of SAReq.
+
 2. Download the appropriate archive file for your operating system and architecture along with its corresponding `.sha256` checksum file.
+
 3. Verify the integrity of the downloaded archive using the SHA256 checksum provided in the `.sha256` file.
+
+    ```sh
+    # compute the SHA256 checksum of the downloaded archive
+    # compare it with the value in the .sha256 file
+
+    # to compute the SHA256 checksum on Windows
+    Get-FileHash -Algorithm SHA256 NAME_OF_DOWNLOADED_ARCHIVE.zip
+
+    # to compute the SHA256 checksum on Linux
+    sha256sum NAME_OF_DOWNLOADED_ARCHIVE.tar.gz
+
+    # to compute the SHA256 checksum on macOS
+    shasum -a 256 NAME_OF_DOWNLOADED_ARCHIVE.tar.gz
+    ```
+
 4. Once the checksum is verified, extract the contents of the downloaded archive to a directory of your choice.
+
 5. Add the directory containing the extracted `sareq` executable to your system's PATH environment variable. This allows you to run SAReq from any terminal window.
+
 6. To verify the installation, open a new terminal window and run:
     
     ```sh
@@ -101,7 +120,7 @@ Let's start by making a simple GET request to fetch data from a hypothetical API
 sareq get https://api.example.com/users
 ```
 In this example, we are using the `get` command to retrieve a list of users from the specified URL. SAReq will send the request and display the response in your terminal like this:
-```sh
+```
 HTTP/1.1 200 OK
 
 Content-Type: application/json; charset=utf-8
