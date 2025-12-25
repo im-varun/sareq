@@ -76,7 +76,7 @@ archives:
     files:
       - LICENSE
       - README.md
-      # - CHANGELOG.md
+      - CHANGELOG.md
       - docs/*
 
 checksum:
@@ -84,9 +84,5 @@ checksum:
   split: true
 
 changelog:
-  sort: asc
-  filters:
-    exclude:
-      - "^docs:"
-      - "^test:"
-      - "^chore:"
+  disable: true
+  
