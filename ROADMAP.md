@@ -24,4 +24,4 @@ This document outlines the future roadmap for SAReq, detailing planned features 
 
 ## Future Plans & Ideas (post v1.2.0 release)
 
-... list of ideas and plans for future versions beyond v1.2.0 ...
+Exploration of future plans and ideas is ongoing. If you have suggestions or feature requests that you would like to see in SAReq, please feel refer to the Contributing Guidelines for more information on how to submit your ideas.
