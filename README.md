@@ -9,7 +9,6 @@ SAReq, short for "Send A Request", is a command-line HTTP client to help develop
 SAReq is built for:
 - Developers who are just getting started and want to experiment with HTTP requests in a straightforward way.
 - Developers who prefer command-line tools for quick testing and debugging of APIs.
-- Solo developers looking for a minimal tool for testing in a local environment.
 
 ## Features
 

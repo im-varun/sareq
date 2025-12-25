@@ -22,9 +22,6 @@ export default function HomeWhatIsSAReq() {
           <li>
             Developers who prefer command-line tools for quick testing and debugging of APIs.
           </li>
-          <li>
-            Solo developers looking for a minimal tool for testing in a local environment.
-          </li>
         </ul>
       </div>
     </section>
