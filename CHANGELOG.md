@@ -1,3 +1,5 @@
-# Changelog
+# Release Notes
 
-A placeholder for the changelog file.
+## Version 1.0.0 - December 25, 2025
+
+- Initial release of SAReq
