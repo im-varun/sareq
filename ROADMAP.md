@@ -11,6 +11,7 @@ This document outlines the future roadmap for SAReq, detailing planned features 
 - Support for output to files (mainly for response bodies)
 - Enhanced error handling and user-friendly error messages
 - Support for creating environment variables and using them in requests
+- Support for downloading SAReq from Scoop and Homebrew package managers
 
 ## v1.2.0
 
