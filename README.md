@@ -32,7 +32,7 @@ To verify the installation, you can run:
 sareq --version
 # or sareq version
 ```
-This should display the installed version of SAReq.
+This should display the installed version of SAReq. If running the above command results in a "command not found" error, ensure that your Go binary directory (usually `$GOPATH/bin` or `$HOME/go/bin`) is included in your system's PATH environment variable. This should fix the "command not found" issue in most cases.
 
 ### Downloading Pre-built Binaries
 

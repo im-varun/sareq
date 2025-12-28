@@ -22,8 +22,8 @@ export default function HomeQuickInstall() {
                 go install github.com/im-varun/sareq@latest
               </CodeBlock>
               <p className={styles.quickInstallFooterText}>
-                Once downloaded, unpack the binary, add it to your PATH and you are good to 
-                go! Head over to the{" "}
+                Make sure your Go bin directory is added to your PATH, and you are good to 
+                go then! Head over to the{" "}
                 <Link to="/docs/intro/quickstart">Quick Start</Link> guide to get started with SAReq.
               </p>
             </TabItem>
