@@ -1,3 +1,70 @@
 # Contributing
 
-This page will be updated soon with guidelines on how to contribute to SAReq. Stay tuned!
+Thank you for your interest in contributing to SAReq!
+
+## How to Contribute
+
+You can contribute to SAReq in the following ways:
+- **[Reporting Bugs](#reporting-bugs)**
+- **[Bug Fixes and Improvements](#bug-fixes-and-improvements)**
+- **[Feature Requests](#feature-requests)**
+- **[Documentation Updates](#documentation-updates)**
+
+### Reporting Bugs
+
+If you encounter any bugs or issues while using SAReq, please report them by opening an issue on the [GitHub Issues](https://github.com/im-varun/sareq/issues) page. Make sure to search the existing issues first to see if the bug has already been reported.
+
+When reporting a bug, prefix the issue title with `[bug]` and provide a clear and concise description of the problem, including details of the environment where the issue occurred (e.g., operating system, etc.) and the steps to reproduce it if possible.
+
+### Bug Fixes and Improvements
+
+Bug fixes and improvements must be related to an existing issue. If you cannot find an existing issue for the bug you want to fix or the improvement you want to make, please create a new issue first.
+
+To contribute a bug fix or improvement, please follow these steps:
+1. Fork the repository on GitHub.
+2. Clone your forked repository to your local machine.
+3. Create a new branch for your changes. Use this naming convention when creating the branch: `fix/<issue-number>-<issue-title>` where `<issue-number>` is the number of the issue you are addressing and `<issue-title>` is the title of the issue with spaces replaced by hyphens.
+4. Make your changes in the new branch.
+5. Commit your changes with a descriptive commit message. The commit message should always start with a capital letter and use the present tense (e.g., "Fix bug in request handling").
+6. Push your changes to your forked repository.
+7. Open a pull request in the original SAReq repository, describing the changes you made and referencing the issue number (e.g., "Fixes #123").
+
+All contributions will be reviewed, and feedback may be provided. Please be patient as maintainers may take some time to review your pull request.
+
+Some general code guidelines to follow:
+- Follow Go conventions and best practices (`go fmt`, idiomatic Go code, etc.).
+- Ensure your code is well-documented and includes comments where necessary.
+- Write clear and concise commit messages.
+- Keep PRs focused on a single issue.
+
+### Feature Requests
+
+If you have an idea for a new feature or enhancement, please open an issue on the [GitHub Issues](https://github.com/im-varun/sareq/issues) page.
+
+When submitting a feature request, prefix the issue title with `[feature]` and provide a detailed description of the feature, including its purpose and any relevant use cases. Feel free to include any mockups or examples that may help illustrate your idea.
+
+Please note that contributors cannot directly implement new features. Feature requests will be reviewed by maintainers, and if approved, implemented by them according to the project's roadmap.
+
+### Documentation Updates
+
+The SAReq documentation includes the command-line help text and SAReq's documentation site (https://sareq.dev). The command-line help text is also exported to the documentation site by generating markdown docs from the codebase using the internal `gendoc` tool.
+
+If you find any errors, omissions, or areas for improvement in the command-line help text, submit it as a bug fix / improvement as described in the [Bug Fixes and Improvements](#bug-fixes-and-improvements) section. These changes will be automatically reflected in the documentation site during the next documentation generation.
+
+For other documentation updates, such as adding new sections or improving existing content on the documentation site, please open an issue on the [GitHub Issues](https://github.com/im-varun/sareq/issues) page, prefixing the issue title with `[docs]`. Provide a clear description of the changes you propose. To contribute to documentation updates, follow the same process as described in the [Bug Fixes and Improvements](#bug-fixes-and-improvements) section, except use the branch naming convention `docs/<issue-number>-<issue-title>`.
+
+## Core Development
+
+Currently, only maintainers can contribute directly to the core development of SAReq, i.e, working on major features according to the project's roadmap and managing releases. If you are interested in becoming a maintainer, please reach out to the current maintainers.
+
+## Branching Strategy Summary
+
+The following branching strategy is used for the project:
+- `main`: This is the stable branch that always contains the latest released version of SAReq.
+- `dev`: This is the development branch where active development takes place. This branch is restricted to maintainers only.
+- Bug fix branches: These branches are created from the `main` branch and follow the naming convention `fix/<issue-number>-<issue-title>`.
+- Documentation branches: These branches are created from the `main` branch and follow the naming convention `docs/<issue-number>-<issue-title>`.
+
+## Asking Questions
+
+If you have any questions related to a specific issue or contribution, feel free to ask in the comments section of the relevant GitHub issue. For general questions about SAReq, you can open a new issue with the prefix `[question]` in the title.
