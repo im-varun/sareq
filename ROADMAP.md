@@ -4,8 +4,8 @@ This document outlines the future roadmap for SAReq, detailing planned features 
 
 ## v1.1.0
 
-**Development timeline:** January 1, 2026 - March 31, 2026  
-**Tentative release data:** April 1, 2026
+**Development timeline:** January 1, 2026 - April 30, 2026  
+**Tentative release date:** May 1, 2026
 
 - Support for input from files (mainly for request bodies)
 - Support for output to files (mainly for response bodies)
@@ -17,7 +17,7 @@ This document outlines the future roadmap for SAReq, detailing planned features 
 ## v1.2.0
 
 **Development timeline:** May 1, 2026 - August 31, 2026  
-**Tentative release data:** September 1, 2026
+**Tentative release date:** September 1, 2026
 
 - HTTP Requests Registry (a centralized place to manage and reuse HTTP requests)
     - Save frequently used requests to the registry
