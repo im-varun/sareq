@@ -2,10 +2,7 @@
 
 This document outlines the future roadmap for SAReq, detailing planned features and improvements to enhance user experience and functionality. Some of these features are already planned for upcoming releases, while others are long-term goals that will be developed based on user feedback and evolving requirements.
 
-## v1.1.0
-
-**Development timeline:** January 1, 2026 - April 30, 2026  
-**Tentative release date:** May 1, 2026
+## Future Plans & Ideas
 
 - Support for input from files (mainly for request bodies)
 - Support for output to files (mainly for response bodies)
@@ -13,17 +10,9 @@ This document outlines the future roadmap for SAReq, detailing planned features 
 - Support for creating environment variables and using them in requests
 - Support for downloading SAReq from Scoop and Homebrew package managers
 - Default request headers (like User-Agent, Accept, etc.) to be added automatically with each request made using SAReq
-
-## v1.2.0
-
-**Development timeline:** May 1, 2026 - August 31, 2026  
-**Tentative release date:** September 1, 2026
-
 - HTTP Requests Registry (a centralized place to manage and reuse HTTP requests)
     - Save frequently used requests to the registry
     - Import/export requests from/to files
     - Ability to run requests from the registry
 
-## Future Plans & Ideas (post v1.2.0 release)
-
-Exploration of future plans and ideas is ongoing. If you have suggestions or feature requests that you would like to see in SAReq, please feel refer to the Contributing Guidelines for more information on how to submit your ideas.
+If you have suggestions or feature requests that you would like to see in SAReq, please refer to the Contributing Guidelines for more information on how to submit your ideas.
