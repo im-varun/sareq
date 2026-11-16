@@ -4,6 +4,8 @@
     <img src="img/logo.png" width="100" height="100" alt="SAReq Logo">
 </p>
 
+*Note from maintainer (Varun Mulchandani): I have moved on from SAReq and will no longer be maintaining it due to changing priorities and goals. This project was a great learning experience and gave me the opportunity to build and deploy a project in real time. I will be archiving the repository and disabling its documentation website soon.*
+
 SAReq, short for Send A Request, is a command-line HTTP client to help developers and testers send HTTP requests and analyze responses directly from the terminal. It aims to provide a lightweight yet powerful and intuitive environment that minimizes overhead and complexity of the application while maintaining essential developer functionality.
 
 SAReq is built for:
